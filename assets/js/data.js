@@ -8,7 +8,7 @@ window.CAREER = {
   "phone_public": null,
   "github": "https://github.com/ryuihwang",
   "velog": "https://velog.io/@hghkdfbdl/posts",
-  "photo": "assets/profile.jpg",
+  "photo": null,
   "motto": "생각하는 대로 살지 않으면 사는 대로 생각하게 된다.",
   "summary_ko": "바이오 실험실에서 출발해 데이터, AI 모델, 그리고 실제 서비스로 영역을 넓혀 온 AI 엔지니어입니다. 환자유래세포 약물 스크리닝과 임상·유전체 데이터 통합 분석으로 데이터 엔지니어링 역량을 쌓았고, 고려대학교 인공지능 연구실에서 CLIP·Diffusion 기반 멀티모달·생성 모델을 연구했습니다. 이스트캠프에서는 정형·시계열·비정형 프로젝트로 1·2차 프로젝트 대상을 수상했고, 현재 이스트소프트 EST-LAB에서 엑셀 기반 급여 업무를 시스템으로 전환(DX)하고 그 위에 LLM·RAG·LangGraph 기반 AI 보조 계층(AX)을 얹은 PMS를 비롯해, sLLM 회의록 자동화(ESTory)·근태결재(EST-flow)까지 사내 시스템을 단독으로 설계·개발하고 있습니다. '모델은 관찰하고, 코드가 판단한다'는 원칙으로 현실에서 정확하고 안전하게 동작하는 AI 시스템을 만듭니다.",
   "summary_en": "AI engineer who grew from wet-lab bio research into data engineering, multimodal/generative AI research, and production AI systems. Built drug-screening cohort pipelines at a precision-medicine startup, researched CLIP- and diffusion-based models at Korea University's AI lab, won two grand prizes at ESTsoft's AI bootcamp, and is now solo-building an LLM/RAG/LangGraph-powered payroll DX/AX platform at ESTsoft EST-LAB.",

@@ -1,85 +1,27 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<title>황류이 · AI · AX Engineer Portfolio</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="황류이(Ryu I Hwang) — 바이오 연구에서 AI 모델, 사내 AX 서비스까지. AI · AX 엔지니어 포트폴리오.">
-<meta property="og:title" content="황류이 · AI · AX Engineer Portfolio">
-<meta property="og:description" content="From Bench to Bot — 바이오 실험실에서 LLM Agent 서비스까지.">
-<meta property="og:image" content="https://ryuihwang.github.io/assets/img/profile.jpg">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Cdefs%3E%3ClinearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%237255ff%22/%3E%3Cstop offset=%221%22 stop-color=%22%2314b8a6%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%2264%22 height=%2264%22 rx=%2216%22 fill=%22url(%23g)%22/%3E%3Ctext x=%2232%22 y=%2242%22 font-family=%22Arial%22 font-weight=%22700%22 font-size=%2226%22 fill=%22white%22 text-anchor=%22middle%22%3ERH%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<title>황류이 · AI · AX Engineer</title>
+<meta name="description" content="황류이(Ryu I Hwang) — 바이오 데이터에서 멀티모달 AI, LLM 서비스까지. AI · AX 엔지니어 포트폴리오.">
+<meta property="og:title" content="황류이 · AI · AX Engineer">
+<meta property="og:description" content="바이오 데이터에서 출발해 멀티모달 AI와 LLM 서비스까지 만드는 AI 엔지니어.">
+<meta name="theme-color" content="#0b0b0d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%230b0b0d%22/%3E%3Ctext x=%2230%22 y=%2243%22 font-family=%22Arial%22 font-weight=%22800%22 font-size=%2228%22 fill=%22%23b8f24a%22 text-anchor=%22middle%22%3ERH%3C/text%3E%3Ccircle cx=%2251%22 cy=%2240%22 r=%224%22 fill=%22%239b7bff%22/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body data-page="home">
 <header class="nav" id="nav"></header>
 <main>
-  <section class="hero" id="hero" style="padding-bottom:0"></section>
-  <div class="marquee" id="marquee" aria-hidden="true"></div>
-
-  <section id="about">
-    <div class="wrap">
-      <div class="sec-head rv"><div><div class="kicker">01 — About</div><h2 class="sec-title">문제에서 출발해<br>기술의 경계를 넘는 사람</h2></div>
-      <p class="sec-desc">해결해야 할 문제가 생기면 필요한 기술을 직접 배우고 끝까지 구현해 왔습니다. 그 과정이 곧 저의 커리어가 되었습니다.</p></div>
-      <div class="about-grid" id="about-body"></div>
-    </div>
-  </section>
-
-  <section class="journey" id="journey">
-    <div class="wrap">
-      <div class="sec-head rv"><div><div class="kicker">02 — Journey</div><h2 class="sec-title">실험 → 데이터 → AI → 서비스</h2></div>
-      <p class="sec-desc">네 개의 챕터로 이어지는 커리어의 흐름입니다. 각 조직을 누르면 그 안에서 진행한 프로젝트들을 볼 수 있어요.</p></div>
-      <div class="chapters" id="chapters"></div>
-    </div>
-  </section>
-
-  <section id="career">
-    <div class="wrap">
-      <div class="sec-head rv"><div><div class="kicker">03 — Career</div><h2 class="sec-title">경력 &amp; 연구 이력</h2></div>
-      <p class="sec-desc">최신순으로 정리한 소속 조직과, 각 조직에서 수행한 프로젝트입니다.</p></div>
-      <div class="timeline" id="timeline"></div>
-    </div>
-  </section>
-
-  <section class="featured" id="projects">
-    <div class="wrap">
-      <div class="sec-head rv"><div><div class="kicker">04 — Selected Work</div><h2 class="sec-title">대표 프로젝트</h2></div>
-      <p class="sec-desc">이스트소프트에서 단독으로 만든 사내 AX 시스템부터, 수상작과 연구 프로젝트까지.</p></div>
-      <div class="feat-grid" id="feat-grid"></div>
-
-      <div class="sec-head rv" style="margin-top:110px"><div><div class="kicker">All Projects</div><h2 class="sec-title">전체 프로젝트 아카이브</h2></div></div>
-      <div class="filters rv" id="filters"></div>
-      <div class="pgrid" id="pgrid"></div>
-    </div>
-  </section>
-
-  <section id="skills-sec">
-    <div class="wrap">
-      <div class="sec-head rv"><div><div class="kicker">05 — Skills</div><h2 class="sec-title">Tech Stack</h2></div>
-      <p class="sec-desc">웻랩 실험부터 LLM Agent 운영까지, 프로젝트에서 실제로 사용한 기술들입니다.</p></div>
-      <div class="skills-grid" id="skills"></div>
-    </div>
-  </section>
-
-  <section id="honors" style="background:#eef0f8">
-    <div class="wrap">
-      <div class="sec-head rv"><div><div class="kicker">06 — Honors</div><h2 class="sec-title">수상 · 논문 · 자격</h2></div></div>
-      <div class="honors" id="honors-body"></div>
-    </div>
-  </section>
-
-  <section class="contact" id="contact">
-    <div class="wrap rv">
-      <div class="kicker" style="color:var(--violet-2)">07 — Contact</div>
-      <h2>Let's build what<br>actually works.</h2>
-      <p>현업의 문제를 정확하고 안전한 AI 서비스로 바꾸는 일에 관심이 있다면 언제든 연락 주세요.</p>
-      <div class="row" id="contact-row"></div>
-    </div>
-  </section>
+  <section class="hero" id="hero"></section>
+  <section id="focus"><div class="wrap"><span class="kicker">About</span><h2 class="sec-title">이런 일을 합니다</h2><div class="focus" id="focus-body"></div></div></section>
+  <section id="career"><div class="wrap"><span class="kicker">Experience</span><h2 class="sec-title">경력 · 연구</h2><div class="rows" id="career-body"></div></div></section>
+  <section id="projects"><div class="wrap"><span class="kicker">Projects</span><h2 class="sec-title">대표 프로젝트</h2><div id="projects-body"></div></div></section>
+  <section id="skills"><div class="wrap"><span class="kicker">Skills</span><h2 class="sec-title">기술</h2><div class="skills" id="skills-body"></div></div></section>
+  <section id="honors"><div class="wrap"><span class="kicker">Honors</span><h2 class="sec-title">수상 · 논문 · 자격</h2><div class="honors" id="honors-body"></div></div></section>
+  <section class="contact" id="contact"><div class="wrap" id="contact-body"></div></section>
 </main>
 <footer id="footer"></footer>
 <script src="assets/js/data.js"></script>
