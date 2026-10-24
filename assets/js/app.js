@@ -113,7 +113,6 @@
         </div>
         <div class="hero-photo rv">
           <div class="frame"><img src="${esc(P.photo)}" alt="${esc(P.name)} 프로필 사진"></div>
-          <div class="quote">${esc(P.principle)}</div>
           <a class="tag" href="${orgUrl(now)}"><small>Now</small>${esc(now.name_en)}</a>
         </div>
       </div>`;
@@ -125,13 +124,13 @@
     $("#about-body").innerHTML = `
       <div class="about-text rv">
         ${P.about.map((t) => `<p>${esc(t)}</p>`).join("")}
-        <div class="principle">“${esc(P.motto)}”</div>
+        <div class="principle">${esc(P.principle)}</div>
       </div>
       <div class="facts rv">
         <div class="fact"><span class="ico">${ICON.brief}</span><div><small>Now</small><b>${esc(now.name)}</b><span>${esc(now.role)}</span></div></div>
         <div class="fact"><span class="ico">${ICON.cap}</span><div><small>Education</small><b>${esc(edu.school)} ${esc(edu.degree)}</b><span>${esc(edu.major.replace(" (주전공)", ""))} · 부전공 ${esc(edu.minor.replace(" (부전공)", ""))}</span></div></div>
         <div class="fact"><span class="ico">${ICON.trophy}</span><div><small>Highlights</small><b>이스트캠프 1 · 2차 프로젝트 대상</b><span>AACR 2024 포스터 공동저자 · 특허 출원</span></div></div>
-        <div class="fact"><span class="ico">${ICON.badge}</span><div><small>Certificates</small><b>${D.certificates.slice(0, 2).map((c) => esc(c.name.split(" (")[0])).join(" · ")}</b><span>${esc(D.certificates[3].name)}</span></div></div>
+        <div class="fact"><span class="ico">${ICON.badge}</span><div><small>Certificates</small><b>ADsP · DSAC 2급</b><span>${esc(D.certificates[3].name)}</span></div></div>
       </div>`;
 
     // What I do
@@ -183,12 +182,10 @@
     $("#filters").innerHTML = groups.map((g, i) => `<button class="${i ? "" : "on"}" data-f="${g.id}">${esc(g.label)}<span class="n">${g.n}</span></button>`).join("");
     $("#pgrid").innerHTML = PROJECTS.map((p) => `
       <a class="pcard" data-org="${p._org.id}" href="${projUrl(p)}">
-        <div class="thumb">${media(p)}${awardTag(p)}</div>
-        <div class="body">
-          <div class="meta">${esc(p._org.short)} · ${esc(p.period)}</div>
-          <h4>${esc(p.title)}</h4>
-          <p>${esc(p.define)}</p>
-        </div>
+        <div class="meta"><span>${esc(p._org.short)}</span><span>${esc(p.period)}</span></div>
+        <h4>${esc(p.title)}</h4>
+        <p>${esc(p.define)}</p>
+        <div class="foot">${p.award ? awardTag(p) : `<span class="chip">${esc(list(p.tags)[0] || "")}</span>`}<span class="go">${ICON.arrow}</span></div>
       </a>`).join("");
     $$("#filters button").forEach((b) => b.addEventListener("click", () => {
       $$("#filters button").forEach((x) => x.classList.toggle("on", x === b));
@@ -298,7 +295,7 @@
     add("04", "기술스택 및 아키텍처", "영역별 기술 · 아키텍처 · 파이프라인",
       [list(p.stack).length ? subT("영역별 기술스택 · 선택 이유") + table(["영역", "기술", "선택 이유"], p.stack) : "",
        list(p.arch).length ? subT("아키텍처") + `<div class="arch">${p.arch.map(([n, items]) => `<div class="layer"><h4>${esc(n)}</h4><ul>${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}</div>` + (p.flow ? `<div class="flowline"><small>Flow</small>${esc(p.flow)}</div>` : "") : "",
-       list(p.pipes).length ? subT("파이프라인") + p.pipes.map(([n, steps, note]) => `<div class="pipe"><h4>${esc(n)}</h4><ol>${steps.map((s) => `<li><span>${esc(s)}</span></li>`).join("")}</ol>${note ? `<p>${esc(note)}</p>` : ""}</div>`).join("") : "",
+       list(p.pipes).length ? subT("파이프라인") + p.pipes.map(([n, steps, note]) => `<div class="pipe"><h4>${esc(n)}</h4><ol style="--cols:${steps.length <= 6 ? steps.length : Math.ceil(steps.length / 2)}">${steps.map((s, k) => `<li><i>${String(k + 1).padStart(2, "0")}</i>${esc(s)}</li>`).join("")}</ol>${note ? `<p>${esc(note)}</p>` : ""}</div>`).join("") : "",
        list(p.techniques).length ? subT("핵심 기법") + `<div class="tech-grid">${p.techniques.map(([n, d]) => `<div class="tech"><b>${esc(n)}</b><span>${esc(d)}</span></div>`).join("")}</div>` : "",
        list(p.notes).length ? subT("설계 포인트") + bullets(p.notes) : "",
        list(p.figures).length ? subT("실험 자료") + `<div class="figs">${p.figures.map(([src, cap], i) => `<figure><button data-fig="${i}" aria-label="이미지 확대"><img src="${esc(src)}" alt="${esc(cap)}" loading="lazy"></button><figcaption>${esc(cap)}</figcaption></figure>`).join("")}</div>` : ""].join(""));
@@ -317,7 +314,7 @@
     const prev = siblings[i - 1], next = siblings[i + 1];
     $("#doc-main").innerHTML = `
       ${gallery.length ? `<div class="gallery">${gallery.map((s, k) => `<button data-img="${k}" aria-label="이미지 확대"><img src="${esc(s)}" alt="${esc(shortTitle(p))} 이미지 ${k + 1}" loading="lazy"></button>`).join("")}</div>` : ""}
-      ${secs.map((s) => `<section class="dsec rv" id="s${s.num}"><div class="dhead"><span class="num">${s.num}</span><h2>${esc(s.title)}<small>${esc(s.sub)}</small></h2></div>${s.body}</section>`).join("")}
+      ${secs.map((s) => `<section class="dsec rv" id="s${s.num}"><div class="dhead"><span class="num">${s.num}</span><div><h2>${esc(s.title)}</h2><small>${esc(s.sub)}</small></div></div>${s.body}</section>`).join("")}
       <div class="pnav">${prev ? `<a href="${projUrl(prev)}"><small>← 이전 프로젝트</small><b>${esc(shortTitle(prev))}</b></a>` : `<a href="${orgUrl(o)}"><small>← 소속으로</small><b>${esc(o.short)}</b></a>`}${next ? `<a class="next" href="${projUrl(next)}"><small>다음 프로젝트 →</small><b>${esc(shortTitle(next))}</b></a>` : `<a class="next" href="index.html#projects"><small>전체 보기 →</small><b>All Projects</b></a>`}</div>`;
 
     const links = p.links || {};
