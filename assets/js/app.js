@@ -23,6 +23,19 @@
     link: svg('<path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/>'),
   };
 
+  const SKILL_ICON = {
+    "LLM Agent": svg('<rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4M9 4h6M9 13h.01M15 13h.01M9.5 17h5M2 13v3M22 13v3"/>'),
+    RAG: svg('<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h5M14 3l5 5M14 3v5h5M8 12h4M8 16h2"/><circle cx="17" cy="16" r="3"/><path d="m21 20-1.8-1.8"/>'),
+    LangGraph: svg('<circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 6h9M6.3 8.2l4.4 7.6M17.7 8.2l-4.4 7.6"/>'),
+    sLLM: svg('<rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>'),
+    MLOps: svg('<path d="M12 12c-2-2.7-4-4-6-4a4 4 0 0 0 0 8c2 0 4-1.3 6-4Zm0 0c2 2.7 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.3-6 4Z"/>'),
+    "Multimodal AI": svg('<rect x="3" y="4" width="11" height="9" rx="2"/><path d="m3 11 3-3 3 3 2-2 3 3"/><path d="M16 15v5M19 13v9M22 16v3M13 17v1"/>'),
+    Diffusion: svg('<path d="M4 5h.01M8 5h.01M4 9h.01M8 9h.01M4 13h.01M6 17h.01M10 13h.01"/><path d="M15 4l1.5 3.5L20 9l-3.5 1.5L15 14l-1.5-3.5L10 9l3.5-1.5Z"/><path d="M18 16l.8 1.7 1.7.8-1.7.8L18 21l-.8-1.7-1.7-.8 1.7-.8Z"/>', 1.8),
+    "Time-series": svg('<path d="M3 3v18h18"/><path d="m7 15 3-4 3 2 4-6 3 3"/>'),
+    FastAPI: svg('<circle cx="12" cy="12" r="9.5"/><path d="M13 5.5 8 13h4l-1 5.5 5-7.5h-4l1-5.5Z"/>'),
+    PyTorch: svg('<path d="M12 3 6.8 8.2a7.3 7.3 0 1 0 10.4 0"/><path d="M15.5 6.5h.01"/>', 2.2),
+  };
+
   /* ---------- lookups ---------- */
   const ORGS = D.orgs;
   const orgById = Object.fromEntries(ORGS.map((o) => [o.id, o]));
@@ -32,26 +45,29 @@
   const projUrl = (p) => `project.html?id=${encodeURIComponent(p.id)}`;
   const orgUrl = (o) => `org.html?id=${encodeURIComponent(o.id)}`;
   const ym = (s) => String(s || "").slice(0, 7);
-  const shortTitle = (p) => (p.product_name && (p.title || "").startsWith(p.product_name) ? p.product_name : p.title || "");
+  const shortTitle = (p) => p.product_name || p.title || "";
+  const ptag = (p) => (p.product_name ? `<span class="ptag">${esc(p.product_name)}</span>` : "");
   const imagesOf = (p) => (list(p.images).length ? list(p.images).map((src) => [src, ""]) : list(p.figures));
-  const cover = (p) => `<div class="cover c${p._org.chapter || 4}"><b>${esc(p.product_name || shortTitle(p))}</b></div>`;
+  const cover = (p) => `<div class="cover c${p._org.chapter || 4}"><b>${esc(p.product_name || p.cover_label || p.title)}</b></div>`;
   const media = (p) => {
     const im = imagesOf(p)[0];
     return im ? `<img src="${esc(im[0])}" alt="" loading="lazy">` : cover(p);
   };
-  const awardTag = (p) => (p.award ? `<span class="award">🏆 ${esc(p.award)}</span>` : "");
+  const awardTag = (p) => (p.award ? `<span class="award"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>${esc(p.award)}</span>` : "");
 
   /* ---------- shared chrome ---------- */
   function chrome() {
     const nav = $("#nav");
     if (nav) {
       const h = document.body.dataset.page === "home" ? "" : "index.html";
+      const pg = document.body.dataset.page;
+      const on = (p) => (pg === p ? ' class="on" aria-current="page"' : "");
       nav.innerHTML = `<div class="wrap">
-        <a class="brand" href="index.html"><span class="logo">RH</span>RYU I HWANG</a>
+        <a class="brand" href="index.html"><img class="logo-l" src="assets/img/logo.png" alt="ryui hwang"><img class="logo-d" src="assets/img/logo-dark.png" alt=""></a>
         <button class="menu-btn" aria-label="메뉴 열기" aria-expanded="false"><span></span></button>
         <nav class="nav-links">
-          <a href="${h}#about">About</a><a href="${h}#focus">What I do</a><a href="${h}#experience">Experience</a>
-          <a href="${h}#projects">Projects</a><a href="${h}#contact">Contact</a>
+          <a href="about.html"${on("about")}>About</a><a href="work.html"${on("work")}>What I do</a><a href="experience.html"${on("experience")}>Experience</a>
+          <a href="projects.html"${on("projects")}>Projects</a><a href="${h}#contact">Contact</a>
           <a class="btn btn-dark" href="resume.html">Resume ${ICON.down}</a>
         </nav></div>`;
       const btn = $(".menu-btn", nav);
@@ -61,11 +77,15 @@
       onScroll(); addEventListener("scroll", onScroll, { passive: true });
     }
     const f = $("#footer");
-    if (f) f.innerHTML = `<div class="wrap"><span>© ${new Date().getFullYear()} ${esc(D.profile.name)} · ${esc(D.profile.name_en)}</span><span><a href="${esc(D.profile.github)}" target="_blank" rel="noopener">GitHub</a> · <a href="${esc(D.profile.velog)}" target="_blank" rel="noopener">Velog</a> · <a href="mailto:${esc(D.profile.email)}">${esc(D.profile.email)}</a></span></div>`;
+    if (f) f.innerHTML = `<div class="wrap foot">
+      <a class="foot-logo" href="index.html"><img class="logo-l" src="assets/img/logo-dark.png" alt="ryui hwang"></a>
+      <nav><a href="${esc(D.profile.github)}" target="_blank" rel="noopener">GitHub</a><a href="${esc(D.profile.velog)}" target="_blank" rel="noopener">Velog</a><a href="mailto:${esc(D.profile.email)}">${esc(D.profile.email)}</a></nav>
+      <small>© ${new Date().getFullYear()} Ryu I Hwang. Designed &amp; built by hand.</small>
+    </div>`;
   }
 
   function reveal() {
-    const els = $$(".rv");
+    const els = $$(".rv, .pop");
     if (!("IntersectionObserver" in window)) return els.forEach((e) => e.classList.add("in"));
     const io = new IntersectionObserver((ents) => ents.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -6% 0px" });
     els.forEach((e) => io.observe(e));
@@ -91,18 +111,83 @@
     return (k) => { show(k); lb.classList.add("on"); };
   }
 
+  /* ---------- shared blocks ---------- */
+  const ICON_NAME = {
+    langchain: "LangGraph", rag: "RAG", openai: "OpenAI", vllm: "vLLM", docker: "Docker", githubactions: "GitHub Actions",
+    pytorch: "PyTorch", huggingface: "Hugging Face", tensorflow: "TensorFlow", python: "Python", scikitlearn: "scikit-learn",
+    pandas: "pandas", numpy: "NumPy", r: "R", jupyter: "Jupyter", xgboost: "XGBoost", fastapi: "FastAPI", react: "React",
+    nextjs: "Next.js", postgresql: "PostgreSQL", typescript: "TypeScript",
+  };
+  const logo = (key, name) => `<span class="lg" title="${esc(name || ICON_NAME[key] || key)}"><img src="assets/icons/${esc(key)}.svg" alt="${esc(name || ICON_NAME[key] || key)}" loading="lazy"></span>`;
+  // Inline emphasis in prose: ==highlight== and **bold**.
+  const rich = (s) => esc(s).replace(/==(.+?)==/g, '<mark class="hl">$1</mark>').replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+  const plain = (s) => String(s || "").replace(/==|\*\*/g, "");
+  const featRow = (p) => `
+      <a class="frow rv" href="${projUrl(p)}">
+        <div class="media">${media(p)}</div>
+        <div class="body">
+          <div class="kicker"><span>${esc(p._org.short)}</span><span>·</span><span>${esc(p.period)}</span>${awardTag(p)}</div>
+          ${ptag(p)}<h3>${esc(p.title)}</h3>
+          <p>${esc(p.define)}</p>
+          <div class="chips">${list(p.tags).slice(0, 4).map((t) => `<span class="chip v">${esc(t)}</span>`).join("")}</div>
+          <span class="go">자세히 보기 ${ICON.arrow}</span>
+        </div>
+      </a>`;
+  const projChips = (ids) => `<div class="plist">${ids.map((id) => projById[id]).filter(Boolean).map((p) => `<a href="${projUrl(p)}">${ptag(p) ? esc(p.product_name) : esc(p.title)} ${ICON.arrow}</a>`).join("")}</div>`;
+
+  // Core skill tiles alternate black / white and swap back and forth over time.
+  function coreTiles(el) {
+    el.innerHTML = D.profile.core.map((k, n) => `<div class="tile pop" style="--i:${n}">${SKILL_ICON[k] || ""}<span>${esc(k)}</span></div>`).join("");
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    setInterval(() => el.classList.toggle("flip"), 2600);
+  }
+
+  function facts(detailed) {
+    const now = ORGS[0], edu = D.education[0];
+    const box = (cls, icon, label, title, sub) => `<div class="fact ${cls} pop"><span class="ico">${icon}</span><div><small>${label}</small><b>${title}</b>${detailed ? `<span>${sub}</span>` : ""}</div></div>`;
+    return `<div class="facts">
+      ${box("f-now", ICON.brief, "Now", esc(now.name), esc(now.role))}
+      ${box("f-edu", ICON.cap, "Education", `${esc(edu.school)} ${esc(edu.degree)}`, `${esc(edu.major.replace(" (주전공)", ""))} · 부전공 ${esc(edu.minor.replace(" (부전공)", ""))}`)}
+      ${box("f-res", ICON.doc, "Research", "논문 · 학회 포스터 · 특허", "MMgene 단독 저자 · AACR 2024 공동저자 · 생분해성 소재 특허 출원")}
+    </div>`;
+  }
+
+  // Awards / research / certificates as three stacked center-line timelines.
+  function honors() {
+    const pl = (id) => (projById[id] ? `<a class="hl-link" href="${projUrl(projById[id])}">프로젝트 ${ICON.arrow}</a>` : "");
+    const tl = (title, icon, rows) => `
+      <section class="hblock rv">
+        <h3 class="hb-title"><span class="ico">${icon}</span>${esc(title)}</h3>
+        <ol class="vline">${rows.map(([date, name, tag, note, link]) => `
+          <li><time>${esc(date)}</time><div><b>${esc(name)}</b>${note ? `<p>${esc(note)}</p>` : ""}<div class="vtags"><span class="ltag">${esc(tag)}</span>${link || ""}</div></div></li>`).join("")}
+        </ol>
+      </section>`;
+    const short = (s) => s.replace(" ([이스트캠프] 와썹 AI 모델 개발 13회차)", " (이스트캠프 13기)").replace("[이스트캠프] 와썹 AI 모델 개발 13회차", "이스트캠프 13기");
+    return tl("Awards", ICON.trophy, D.awards.map((a) => [a.date.slice(0, 7), short(a.title), a.issuer, a.note, pl(a.project_id)]))
+      + tl("Publications · Patent", ICON.doc, D.publications_patents.map((x) => [String(x.date).slice(0, 7), x.title, x.type, x.note, pl(x.project_id)]))
+      + tl("Certificates · Training", ICON.badge, [...D.certificates.map((c) => [c.date, c.name, c.issuer, c.note, ""]), ...D.education.slice(1).map((e) => [ym(e.period_start), e.school, e.degree, e.note, ""])].sort((x, y) => (x[0] < y[0] ? 1 : -1)));
+  }
+
+  const SMILE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c.9 1.3 2.1 2 3.5 2s2.6-.7 3.5-2M9 9.5h.01M15 9.5h.01"/></svg>';
+  const orgMark = (o) => (o.logo ? `<span class="omark"><img src="${esc(o.logo)}" alt="${esc(o.name)} 로고"></span>` : `<span class="omark smile">${SMILE}</span>`);
+  const pageHero = (kicker, title, lead) => `
+      <div class="wrap center">
+        <span class="eyebrow"><i></i>${esc(kicker)}</span>
+        <h1>${esc(title)}</h1>
+        <p class="tagline">${rich(lead)}</p>
+      </div>`;
+
   /* ---------- HOME ---------- */
   function home() {
     const P = D.profile;
-    const now = ORGS[0];
     $("#hero").innerHTML = `
       <div class="wrap hero-grid">
-        <div class="rv">
-          <p class="hello"><b>${esc(P.name)}</b> · ${esc(P.eyebrow)}</p>
+        <div class="hero-copy rv">
+          <div class="hello" aria-hidden="true"></div>
           <h1>${esc(P.headline[0])}<br><span class="mark">${esc(P.headline[1])}</span>${esc(P.headline[2])}</h1>
           <p class="lede">${esc(P.lede)}</p>
           <div class="hero-cta">
-            <a class="btn btn-dark" href="#projects">프로젝트 보기 ${ICON.arrow}</a>
+            <a class="btn btn-dark" href="projects.html">프로젝트 보기 ${ICON.arrow}</a>
             <a class="btn btn-line" href="resume.html">이력서</a>
           </div>
           <div class="socials">
@@ -111,107 +196,194 @@
             <a href="mailto:${esc(P.email)}" aria-label="Email">${ICON.mail}</a>
           </div>
         </div>
-        <div class="hero-photo rv">
-          <img src="assets/img/hero.svg" alt="데이터, 모델, 서비스로 이어지는 AI 파이프라인 인포그래픽">
+        <div class="hero-visual">
+          <div class="hv-panel" id="hv-panel">
+            <span class="hv-ring" aria-hidden="true"></span>
+            <div class="hv-stage" id="hv-stage">
+              <img class="scene on" src="assets/img/scene-1.png" alt="노트북 앞에서 코드와 차트를 보며 일하는 엔지니어 일러스트"><img class="scene" src="assets/img/scene-dark.png" alt="헤드폰을 쓰고 모니터 앞에서 코딩하는 엔지니어 일러스트">
+            </div>
+            <label class="hv-toggle"><button type="button" class="switch" role="switch" aria-checked="false" aria-label="다크 모드"><i></i></button></label>
+          </div>
         </div>
       </div>`;
-    const kw = [...P.keywords, "FastAPI", "PyTorch", "Data Science"];
-    $("#marquee").innerHTML = `<div class="track">${[...kw, ...kw].map((k) => `<span>${esc(k)}</span>`).join("")}</div>`;
+    heroVisual();
+    coreTiles($("#core-grid"));
 
-    // About
-    const edu = D.education[0];
     $("#about-body").innerHTML = `
-      <div class="about-text rv">
-        ${P.about.map((t) => `<p>${esc(t)}</p>`).join("")}
-      </div>
-      <div class="facts rv">
-        <div class="fact"><span class="ico">${ICON.brief}</span><div><small>Now</small><b>${esc(now.name)}</b><span>${esc(now.role)}</span></div></div>
-        <div class="fact"><span class="ico">${ICON.cap}</span><div><small>Education</small><b>${esc(edu.school)} ${esc(edu.degree)}</b><span>${esc(edu.major.replace(" (주전공)", ""))} · 부전공 ${esc(edu.minor.replace(" (부전공)", ""))}</span></div></div>
-        <div class="fact"><span class="ico">${ICON.trophy}</span><div><small>Highlights</small><b>이스트캠프 1 · 2차 프로젝트 대상</b><span>AACR 2024 포스터 공동저자 · 특허 출원</span></div></div>
-        <div class="fact"><span class="ico">${ICON.badge}</span><div><small>Certificates</small><b>ADsP · DSAC 2급</b><span>${esc(D.certificates[3].name)}</span></div></div>
-      </div>`;
+      <div class="about-fig pop"><img src="assets/img/hero.svg" alt="데이터, 모델, 서비스로 이어지는 AI 파이프라인 인포그래픽"></div>
+      ${facts(false)}`;
 
-    // What I do
     $("#focus-grid").innerHTML = D.focus.map((f, i) => `
-      <div class="fcard rv">
+      <a class="fcard rv" href="work.html#w${i + 1}">
         <span class="n">0${i + 1}</span>
         <h3>${esc(f.t)}</h3>
-        <p>${esc(f.d)}</p>
-        <div class="chips">${f.k.map((k) => `<span class="chip">${esc(k)}</span>`).join("")}</div>
-      </div>`).join("");
+        <div class="logos">${f.icons.map((k) => logo(k)).join("")}</div>
+      </a>`).join("");
 
-    // Experience
-    $("#exp-list").innerHTML = ORGS.map((o) => {
-      const ch = D.chapters.find((c) => c.n === o.chapter);
-      return `<a class="ecard rv" href="${orgUrl(o)}">
-        <span class="badge">${esc(o.badge)}</span>
-        <div>
-          <h3>${esc(o.name)}</h3>
-          <div class="role">${esc(o.role)}</div>
-          <p class="one">${esc(o.one_liner)}</p>
-          <div class="plinks">${o.projects.map((p) => `<span data-href="${projUrl(p)}">${esc(shortTitle(p))}</span>`).join("")}</div>
-        </div>
-        <div class="date">${esc(ym(o.period_start))} ~ ${esc(o.period_end === "현재" ? "현재" : ym(o.period_end))}${ch ? `<span>${esc(ch.en)}</span>` : ""}</div>
-      </a>`;
-    }).join("");
-    $$("#exp-list .plinks span").forEach((s) => {
-      s.setAttribute("role", "link"); s.tabIndex = 0;
-      const go = (e) => { e.preventDefault(); e.stopPropagation(); location.href = s.dataset.href; };
-      s.addEventListener("click", go);
-      s.addEventListener("keydown", (e) => { if (e.key === "Enter") go(e); });
-    });
-
-    // Featured
-    const feat = PROJECTS.filter((p) => p.featured);
-    $("#feat-list").innerHTML = feat.map((p) => `
-      <a class="frow rv" href="${projUrl(p)}">
-        <div class="media">${media(p)}</div>
-        <div class="body">
-          <div class="kicker"><span>${esc(p._org.short)}</span><span>·</span><span>${esc(p.period)}</span>${awardTag(p)}</div>
-          <h3>${esc(p.title)}</h3>
-          <p>${esc(p.define)}</p>
-          <div class="chips">${list(p.tags).slice(0, 4).map((t) => `<span class="chip v">${esc(t)}</span>`).join("")}</div>
-          <span class="go">자세히 보기 ${ICON.arrow}</span>
+    // Timeline: one vertical life line, newest at the top with a branch card.
+    const span = (o) => { const a = ym(o.period_start).slice(0, 4), b = o.period_end === "현재" ? "현재" : ym(o.period_end).slice(0, 4); return a === b ? a : `${a} ~ ${b}`; };
+    $("#exp-list").innerHTML = ORGS.map((o, i) => `
+      <a class="tl-row rv${i === 0 ? " now" : ""}${i % 2 ? " r" : " l"}" href="${orgUrl(o)}">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <div class="tl-card">
+          <div class="tl-year">${esc(span(o))}</div>
+          <h3>${esc(o.role.split(" · ")[0])}</h3>
+          <p>${esc(o.name)}</p>
+          ${o.location ? `<span class="ltag">${esc(o.location)}</span>` : ""}
+          ${i === 0 ? `<p class="tl-what">${esc(o.one_liner.split(":")[0])}</p>` : ""}
         </div>
       </a>`).join("");
 
-    // Archive
-    const groups = [{ id: "all", label: "전체", n: PROJECTS.length }, ...ORGS.map((o) => ({ id: o.id, label: o.short, n: o.projects.length }))];
-    $("#filters").innerHTML = groups.map((g, i) => `<button class="${i ? "" : "on"}" data-f="${g.id}">${esc(g.label)}<span class="n">${g.n}</span></button>`).join("");
-    $("#pgrid").innerHTML = PROJECTS.map((p) => `
-      <a class="pcard" data-org="${p._org.id}" href="${projUrl(p)}">
-        <div class="meta"><span>${esc(p._org.short)}</span><span>${esc(p.period)}</span></div>
-        <h4>${esc(p.title)}</h4>
-        <p>${esc(p.define)}</p>
-        <div class="foot">${p.award ? awardTag(p) : `<span class="chip">${esc(list(p.tags)[0] || "")}</span>`}<span class="go">${ICON.arrow}</span></div>
+    // Project wall: mosaic of cover images; hovering one grows it and reveals its info.
+    $("#feat-list").outerHTML = `<div class="wall" id="wall"></div>`;
+    const wallItems = [...PROJECTS.filter((p) => p.featured), ...PROJECTS.filter((p) => !p.featured && imagesOf(p).length)];
+    // [row, col, height, width] per tile; two 4x4 blocks tile the grid with no holes.
+    const SPOTS = [[1,1,2,2],[1,3,2,1],[1,4,2,1],[3,1,1,2],[3,3,1,1],[3,4,1,1],[4,1,1,1],[4,2,1,1],[4,3,1,2],
+                   [5,1,1,1],[5,2,1,1],[5,3,2,2],[6,1,2,1],[6,2,2,1],[7,3,1,1],[7,4,1,1],[8,1,1,2],[8,3,1,2]];
+    $("#wall").innerHTML = wallItems.slice(0, SPOTS.length).map((p, n) => `
+      <a class="wtile" style="grid-area:${SPOTS[n][0]} / ${SPOTS[n][1]} / span ${SPOTS[n][2]} / span ${SPOTS[n][3]}" href="${projUrl(p)}">
+        ${media(p)}
+        <div class="winfo"><span class="wo">${esc(p._org.short)}</span><b>${esc(p.product_name ? p.product_name + " · " : "")}${esc(p.title)}</b>${p.award ? awardTag(p) : ""}</div>
       </a>`).join("");
-    $$("#filters button").forEach((b) => b.addEventListener("click", () => {
-      $$("#filters button").forEach((x) => x.classList.toggle("on", x === b));
-      $$("#pgrid .pcard").forEach((c) => c.classList.toggle("hide", b.dataset.f !== "all" && c.dataset.org !== b.dataset.f));
-    }));
 
-    // Skills
-    $("#skill-grid").innerHTML = Object.entries(D.skills).map(([k, v]) => `
-      <div class="sbox rv"><h4>${esc(k)}</h4><div class="chips">${v.map((s) => `<span class="chip">${esc(s)}</span>`).join("")}</div></div>`).join("");
+  }
 
-    // Honors
-    const pl = (id) => (projById[id] ? ` · <a href="${projUrl(projById[id])}">프로젝트 →</a>` : "");
-    $("#honors-body").innerHTML = `
-      <div class="panel rv"><h3><span class="ico">${ICON.trophy}</span>Awards</h3><ul class="hlist">
-        ${D.awards.map((a) => `<li><time>${esc(a.date.slice(0, 7))}</time><div><b>${esc(a.title.replace("[이스트캠프] 와썹 AI 모델 개발 13회차", "이스트캠프 13기"))}</b><small>${esc(a.issuer)}${pl(a.project_id)}</small></div></li>`).join("")}
-      </ul></div>
-      <div class="panel rv"><h3><span class="ico">${ICON.doc}</span>Publications · Patent</h3><ul class="hlist">
-        ${D.publications_patents.map((x) => `<li><time>${esc(String(x.date).slice(0, 7))}</time><div><b>${esc(x.title)}</b><small>${esc(x.type)}${x.venue ? " · " + esc(x.venue) : ""}${x.number ? " · " + esc(x.number) : ""}${pl(x.project_id)}</small></div></li>`).join("")}
-      </ul></div>
-      <div class="panel rv"><h3><span class="ico">${ICON.badge}</span>Certificates · Education</h3><ul class="hlist">
-        ${D.certificates.map((c) => `<li><time>${esc(c.date)}</time><div><b>${esc(c.name)}</b><small>${esc(c.issuer)}</small></div></li>`).join("")}
-        ${D.education.slice(1).map((e) => `<li><time>${esc(ym(e.period_start))}</time><div><b>${esc(e.school)}</b><small>${esc(e.degree)}</small></div></li>`).join("")}
-      </ul></div>`;
-
-    $("#contact-row").innerHTML = `
+  function contactRow() {
+    const P = D.profile, el = $("#contact-row");
+    if (!el) return;
+    el.innerHTML = `
       <a class="btn btn-lime" href="mailto:${esc(P.email)}">${ICON.mail} ${esc(P.email)}</a>
       <a class="btn btn-ghost-w" href="${esc(P.github)}" target="_blank" rel="noopener">GitHub ${ICON.ext}</a>
       <a class="btn btn-ghost-w" href="${esc(P.velog)}" target="_blank" rel="noopener">Velog ${ICON.ext}</a>`;
+  }
+
+  /* ---------- ABOUT ---------- */
+  function aboutPage() {
+    const P = D.profile;
+    $("#sub-hero").innerHTML = pageHero("About", "데이터부터 서비스까지 연결하는 엔지니어", P.about[0]);
+    $("#about-full").innerHTML = `
+      <div class="about-fig pop"><img src="assets/img/hero.svg" alt="데이터, 모델, 서비스로 이어지는 AI 파이프라인 인포그래픽"></div>
+      <div class="about-text pop">${P.about.slice(1).map((t) => `<p>${rich(t)}</p>`).join("")}</div>
+      ${facts(true)}`;
+    coreTiles($("#core-grid"));
+    $("#skill-notes").innerHTML = P.core.map((k) => {
+      const [note, ids] = D.skill_notes[k] || ["", []];
+      return `<article class="snote rv"><span class="sico">${SKILL_ICON[k] || ""}</span><div><h3>${esc(k)}</h3><p>${rich(note)}</p>${projChips(ids)}</div></article>`;
+    }).join("");
+  }
+
+  /* ---------- WHAT I DO ---------- */
+  function workPage() {
+    $("#sub-hero").innerHTML = pageHero("What I do", "이런 일을 합니다", "LLM 에이전트와 MLOps, 멀티모달 · 생성 모델, 데이터 분석, 그리고 이 모두를 실제 업무 서비스로 묶는 엔지니어링까지 네 가지 영역에서 일합니다.");
+    $("#work-list").innerHTML = D.focus.map((f, i) => `
+      <article class="work rv" id="w${i + 1}">
+        <div class="work-head">
+          <span class="n">0${i + 1}</span>
+          <h2>${esc(f.t)}</h2>
+          <div class="logos">${f.icons.map((k) => logo(k)).join("")}</div>
+        </div>
+        <p class="prose">${rich(f.intro)}</p>
+        <ol class="steps">${f.does.map((x) => { const k = x.indexOf(": "); return `<li>${k > 0 ? `<b>${esc(x.slice(0, k))}</b>: ${esc(x.slice(k + 2))}` : esc(x)}</li>`; }).join("")}</ol>
+        <h3 class="sub-t">관련 프로젝트</h3>
+        ${projChips(f.projects)}
+      </article>`).join("");
+    $("#tech-board").innerHTML = D.tech.map((g) => `
+      <div class="tcol t-${esc(g.tone)} rv">
+        <h4><span>${esc(g.area)}</span><small>${esc(g.en)}</small></h4>
+        <ul>${g.items.map(([k, n, d]) => `<li>${logo(k, n)}<div><b>${esc(n)}</b><span>${esc(d)}</span></div></li>`).join("")}</ul>
+      </div>`).join("");
+  }
+
+  /* ---------- EXPERIENCE ---------- */
+  function experiencePage() {
+    $("#sub-hero").innerHTML = pageHero("Experience", "경력 · 연구 이력", "실험실에서 데이터를 만들던 일부터 사내 AI 시스템을 설계하는 지금까지, 소속별로 맡은 역할과 프로젝트입니다.");
+    $("#exp-full").innerHTML = ORGS.map((o) => {
+      const ch = D.chapters.find((c) => c.n === o.chapter);
+      return `<article class="xcard rv">
+        <div class="xside">${orgMark(o)}<div class="date">${esc(ym(o.period_start))} ~ ${esc(o.period_end === "현재" ? "현재" : ym(o.period_end))}</div>${ch ? `<span class="chip v">${esc(ch.en)}</span>` : ""}</div>
+        <div class="xbody">
+          <h2><a class="org-go" href="${orgUrl(o)}">${esc(o.name)}<span class="arr" aria-hidden="true">${ICON.arrow}</span></a></h2>
+          <div class="ltags">${o.role.split(" · ").map((r) => `<span class="ltag">${esc(r)}</span>`).join("")}${o.location ? `<span class="ltag loc">${esc(o.location)}</span>` : ""}</div>
+          <p class="prose">${esc(o.description)}</p>
+          <ul class="xproj">${o.projects.map((p) => `<li><a href="${projUrl(p)}">${ptag(p)}<b>${esc(p.title)}</b><span>${esc(p.period)}</span></a></li>`).join("")}</ul>
+        </div>
+      </article>`;
+    }).join("");
+    $("#honors-body").innerHTML = honors();
+  }
+
+  /* ---------- PROJECTS ---------- */
+  function projectsPage() {
+    const withImg = PROJECTS.filter((p) => imagesOf(p).length);
+    const fan = [...withImg.filter((p) => p.featured), ...withImg].slice(0, 5);
+    $("#sub-hero").outerHTML = `
+      <section class="pj-hero">
+        <div class="wrap pj-hero-grid">
+          <div class="rv">
+            <h1>Projects</h1>
+            <h2>AX · AI Engineering</h2>
+            <p>사내 업무를 시스템으로 옮기고 그 위에 LLM · 에이전트를 얹는 AX 프로젝트부터, 멀티모달 · 생성 모델 연구와 데이터 분석까지.</p>
+            <p>모든 프로젝트는 같은 양식으로 정리했습니다. 카드를 누르면 핵심 요약부터 성과 측정, AX 확장 방향까지 볼 수 있습니다.</p>
+          </div>
+          <div class="fan rv" aria-hidden="true">${fan.map((p, i) => `<img style="--k:${i - Math.floor(fan.length / 2)}" src="${esc(imagesOf(p)[0][0])}" alt="">`).join("")}</div>
+        </div>
+      </section>`;
+    const OTHER = ["independent", "pnu-bit-virus-lab", "dong-eui-univ"];
+    const groupOf = (o) => (OTHER.includes(o.id) ? "etc" : o.id);
+    const groups = [{ id: "all", label: "All" }, ...ORGS.filter((o) => !OTHER.includes(o.id)).map((o) => ({ id: o.id, label: o.short })), { id: "etc", label: "그 외" }];
+    $("#filters").innerHTML = groups.map((g, i) => `<button class="${i ? "" : "on"}" data-f="${g.id}">${esc(g.label)}</button>`).join("");
+    const PER = 9;
+    let filter = "all", page = 1;
+    const draw = () => {
+      const items = PROJECTS.filter((p) => filter === "all" || groupOf(p._org) === filter);
+      const pages = Math.max(1, Math.ceil(items.length / PER));
+      page = Math.min(page, pages);
+      $("#pgrid").innerHTML = items.slice((page - 1) * PER, page * PER).map((p) => `
+        <a class="gcard" href="${projUrl(p)}">
+          <div class="gimg">${media(p)}</div>
+          <div class="gtags">${p.product_name ? `<span class="ptag">${esc(p.product_name)}</span>` : ""}${list(p.tags)[0] ? `<span class="mtag">${esc(p.tags[0])}</span>` : ""}${p.award ? awardTag(p) : ""}</div>
+          <div class="gcap"><small>${esc(p._org.short)} · ${esc(p.period)}</small><b>${esc(p.title)}</b></div>
+        </a>`).join("");
+      $("#pager").innerHTML = pages < 2 ? "" : `<button data-p="${page - 1}" ${page === 1 ? "disabled" : ""} aria-label="이전">‹</button>${Array.from({ length: pages }, (_, k) => `<button data-p="${k + 1}" class="${k + 1 === page ? "on" : ""}">${k + 1}</button>`).join("")}<button data-p="${page + 1}" ${page === pages ? "disabled" : ""} aria-label="다음">›</button>`;
+      $$("#pager button").forEach((b) => b.addEventListener("click", () => { page = +b.dataset.p; draw(); $("#filters").scrollIntoView({ behavior: "smooth", block: "start" }); }));
+    };
+    $$("#filters button").forEach((b) => b.addEventListener("click", () => {
+      $$("#filters button").forEach((x) => x.classList.toggle("on", x === b));
+      filter = b.dataset.f; page = 1; draw();
+    }));
+    draw();
+  }
+
+  // Theme toggle in the hero panel: light shows scene 1, dark shows scene 2. Choice persists per viewer.
+  function heroVisual() {
+    const panel = $("#hv-panel"), stage = $("#hv-stage"), sw = $(".hv-toggle .switch");
+    if (!panel) return;
+    const scenes = $$(".scene", stage);
+    const root = document.documentElement;
+    const show = (k) => scenes.forEach((s, n) => {
+      if (n === k) { s.classList.remove("out"); s.classList.add("on"); }
+      else if (s.classList.contains("on")) { s.classList.remove("on"); s.classList.add("out"); setTimeout(() => s.classList.remove("out"), 900); }
+    });
+    const apply = (dark, save) => {
+      root.dataset.theme = dark ? "dark" : "light";
+      sw.setAttribute("aria-checked", dark);
+      show(dark ? 1 : 0);
+      if (save) { try { localStorage.setItem("theme", dark ? "dark" : "light"); } catch (e) { /* storage blocked */ } }
+    };
+    apply(root.dataset.theme === "dark", false);
+    sw.addEventListener("click", () => apply(root.dataset.theme !== "dark", true));
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const p = Math.min(1, Math.max(0, scrollY / (panel.offsetHeight + 200)));
+        panel.style.setProperty("--p", p.toFixed(3));
+        ticking = false;
+      });
+    };
+    onScroll(); addEventListener("scroll", onScroll, { passive: true });
   }
 
   /* ---------- ORG ---------- */
@@ -221,21 +393,21 @@
     const ch = D.chapters.find((c) => c.n === o.chapter);
     $("#sub-hero").innerHTML = `
       <div class="wrap">
-        <div class="crumbs"><a href="index.html">Home</a><i>/</i><a href="index.html#experience">Experience</a><i>/</i><span>${esc(o.short)}</span></div>
         ${ch ? `<span class="eyebrow"><i></i>${esc(ch.en)} · ${esc(ch.ko)}</span>` : ""}
         <h1>${esc(o.name)}</h1>
         <p class="tagline">${esc(o.description || o.one_liner)}</p>
-        <div class="meta-row">
-          <div><small>Period</small>${esc(o.period_start)} ~ ${esc(o.period_end)}</div>
-          <div><small>Role</small>${esc(o.role)}</div>
-          ${o.location ? `<div><small>Location</small>${esc(o.location)}</div>` : ""}
+        <div class="meta-tags">
+          <div><span class="ltag">Period</span><b>${esc(o.period_start)} ~ ${esc(o.period_end)}</b></div>
+          <div><span class="ltag">Role</span><b>${esc(o.role)}</b></div>
+          ${o.location ? `<div><span class="ltag">Location</span><b>${esc(o.location)}</b></div>` : ""}
         </div>
       </div>`;
+    // Same image cards as the Projects page, with the project details kept inside.
     $("#org-projects").innerHTML = o.projects.map((p) => `
-      <a class="frow rv" href="${projUrl(p)}">
-        <div class="media">${media(p)}</div>
-        <div class="body">
-          <div class="kicker"><span>${esc(p.period)}</span><span>·</span><span>${esc(p.role.split(" · ")[0])}</span>${awardTag(p)}</div>
+      <a class="ocard rv" href="${projUrl(p)}">
+        <div class="gimg">${media(p)}<div class="gtags">${p.product_name ? `<span class="ptag">${esc(p.product_name)}</span>` : ""}${list(p.tags)[0] ? `<span class="mtag">${esc(p.tags[0])}</span>` : ""}${awardTag(p)}</div></div>
+        <div class="obody">
+          <div class="ometa"><span>${esc(p.period)}</span><span>${esc(p.role.split(" · ")[0])}</span></div>
           <h3>${esc(p.title)}</h3>
           <p>${esc(p.define)}</p>
           <div class="chips">${list(p.tags).slice(0, 4).map((t) => `<span class="chip v">${esc(t)}</span>`).join("")}</div>
@@ -254,9 +426,8 @@
     document.title = `${shortTitle(p)} | 황류이 Portfolio`;
     $("#sub-hero").innerHTML = `
       <div class="wrap">
-        <div class="crumbs"><a href="index.html">Home</a><i>/</i><a href="${orgUrl(o)}">${esc(o.short)}</a><i>/</i><span>${esc(shortTitle(p))}</span></div>
         <span class="eyebrow"><i></i>${esc(o.short)}${p.award ? ` · 🏆 ${esc(p.award)}` : ""}</span>
-        <h1>${esc(p.title)}</h1>
+        ${ptag(p)}<h1>${esc(p.title)}</h1>
         ${p.tagline ? `<p class="tagline">${esc(p.tagline)}</p>` : ""}
         <div class="meta-row">
           <div><small>Period</small>${esc(p.period)}</div>
@@ -275,8 +446,7 @@
     // 01 핵심 요약
     add("01", "핵심 요약", "한 줄 정의 · 핵심 가치",
       (p.define ? `<div class="define">${esc(p.define)}</div>` : "") +
-      (list(p.values).length ? `<div class="values">${p.values.map(([t, d]) => `<div class="value"><b>${esc(t)}</b><span>${esc(d)}</span></div>`).join("")}</div>` : "") +
-      (p.support ? `<div class="support"><span class="ico">${ICON.link}</span><div><b>${esc(p.support.t)}</b><span>${esc(p.support.d)}</span></div></div>` : ""));
+      (list(p.values).length ? `<div class="values">${p.values.map(([t, d]) => `<div class="value"><b>${esc(t)}</b><span>${esc(d)}</span></div>`).join("")}</div>` : ""));
 
     // 02 배경 및 문제 정의
     add("02", "배경 및 문제 정의", "추진 배경 · Pain Points",
@@ -304,16 +474,19 @@
 
     // 06 기대 효과
     add("06", "기대 효과", "효과 · 확장",
-      (list(p.impact).length ? bullets(p.impact) : ""));
+      (list(p.impact).length ? bullets(p.impact) : "") +
+      (list(p.ax_next).length ? subT("AX 확장 방향 (예정 · 검토)") + `<div class="tech-grid">${p.ax_next.map(([n, d]) => `<div class="tech ax"><b>${esc(n)}</b><span>${esc(d)}</span></div>`).join("")}</div>` : ""));
 
     const gallery = list(p.images);
+    // Spread screenshots through sections 01-04 as numbered figures instead of a top gallery.
+    const figAt = (k) => `<figure class="dfig"><button data-img="${k}" aria-label="이미지 확대"><img src="${esc(gallery[k])}" alt="${esc((p.captions || [])[k] || shortTitle(p))}" loading="lazy"></button><figcaption><b>Figure ${k + 1}.</b> ${esc((p.captions || [])[k] || shortTitle(p))}</figcaption></figure>`;
+    gallery.forEach((_, k) => { const sec = secs[Math.min(k, secs.length - 1, 3)]; if (sec) sec.body += figAt(k); });
     const siblings = o.projects;
     const i = siblings.indexOf(p);
     const prev = siblings[i - 1], next = siblings[i + 1];
     $("#doc-main").innerHTML = `
-      ${gallery.length ? `<div class="gallery">${gallery.map((s, k) => `<button data-img="${k}" aria-label="이미지 확대"><img src="${esc(s)}" alt="${esc(shortTitle(p))} 이미지 ${k + 1}" loading="lazy"></button>`).join("")}</div>` : ""}
       ${secs.map((s) => `<section class="dsec rv" id="s${s.num}"><div class="dhead"><span class="num">${s.num}</span><div><h2>${esc(s.title)}</h2><small>${esc(s.sub)}</small></div></div>${s.body}</section>`).join("")}
-      <div class="pnav">${prev ? `<a href="${projUrl(prev)}"><small>← 이전 프로젝트</small><b>${esc(shortTitle(prev))}</b></a>` : `<a href="${orgUrl(o)}"><small>← 소속으로</small><b>${esc(o.short)}</b></a>`}${next ? `<a class="next" href="${projUrl(next)}"><small>다음 프로젝트 →</small><b>${esc(shortTitle(next))}</b></a>` : `<a class="next" href="index.html#projects"><small>전체 보기 →</small><b>All Projects</b></a>`}</div>`;
+      <div class="pnav">${prev ? `<a href="${projUrl(prev)}"><small>← 이전 프로젝트</small><b>${esc(shortTitle(prev))}</b></a>` : `<a href="${orgUrl(o)}"><small>← 소속으로</small><b>${esc(o.short)}</b></a>`}${next ? `<a class="next" href="${projUrl(next)}"><small>다음 프로젝트 →</small><b>${esc(shortTitle(next))}</b></a>` : `<a class="next" href="projects.html"><small>전체 보기 →</small><b>All Projects</b></a>`}</div>`;
 
     const links = p.links || {};
     $("#toc").innerHTML = `
@@ -323,7 +496,7 @@
       ${Object.keys(links).length ? `<div class="side-box links"><h5>Links</h5>${Object.entries(links).map(([k, v]) => `<a href="${esc(v)}" target="_blank" rel="noopener">${esc(k)} ↗</a>`).join("")}</div>` : ""}`;
 
     if (gallery.length) {
-      const open = lightbox(gallery.map((s) => [s, ""]));
+      const open = lightbox(gallery.map((s, k) => [s, (p.captions || [])[k] || ""]));
       $$("[data-img]").forEach((b) => b.addEventListener("click", () => open(+b.dataset.img)));
     }
     if (list(p.figures).length) {
@@ -347,5 +520,10 @@
   if (page === "home") home();
   if (page === "org") orgPage();
   if (page === "project") projectPage();
+  if (page === "about") aboutPage();
+  if (page === "work") workPage();
+  if (page === "experience") experiencePage();
+  if (page === "projects") projectsPage();
+  contactRow();
   reveal();
 })();

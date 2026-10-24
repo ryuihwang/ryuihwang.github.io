@@ -1,6 +1,6 @@
 # ryuihwang.github.io
 
-황류이(Ryu I Hwang) — AI · AX Engineer 포트폴리오.
+황류이(Ryu I Hwang) AI Engineer 포트폴리오.
 
 - `index.html` 메인 (About · Journey · Career · Projects · Skills · Honors)
 - `org.html?id=…` 조직별 상세, `project.html?id=…` 프로젝트 상세

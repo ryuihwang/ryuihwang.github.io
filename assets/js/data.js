@@ -19,25 +19,99 @@ window.CAREER = {
     github: "https://github.com/ryuihwang",
     velog: "https://velog.io/@hghkdfbdl/posts",
     photo: "assets/img/profile.jpg",
-    eyebrow: "AI Engineer · LLM Systems · Multimodal AI",
-    headline: ["데이터에서 프로덕션까지,", "동작하는 AI 시스템", "을 설계합니다."],
-    lede: "LLM 에이전트와 RAG 파이프라인, 멀티모달 모델, 데이터 분석을 바탕으로 실제 업무에 적용되는 AI 서비스를 만듭니다. 현재 이스트소프트 EST-LAB에서 AI-ML 개발자로 사내 업무 시스템의 AI 전환을 담당하고 있습니다.",
+    role: "AI Engineer · LLM Systems · Multimodal AI",
+    headline: ["AX부터 AI 모델링까지,", "운영되는 시스템", "으로 전환합니다."],
+    lede: "데이터 파이프라인부터 에이전트 설계, 출력 검증, 온프레미스 배포까지 AI 서비스의 처음과 끝을 직접 설계합니다. 현재는 이스트소프트 EST-LAB에서 급여 · 회의록 · 근태결재 시스템을 단독으로 개발해 실제 사내 업무에 투입하고 있습니다.",
     about: [
       "데이터를 이해하는 데서 출발해 모델을 설계하고, 그 모델이 실제 업무 안에서 안정적으로 동작하도록 시스템까지 구축하는 AI 엔지니어입니다.",
-      "삼성서울병원과 정밀의료 기업 에임드바이오에서 약물 스크리닝 · 임상 · 유전체 데이터를 통합하는 분석 파이프라인을 만들며 데이터 엔지니어링의 기본기를 다졌고, 고려대학교 인공지능 연구실에서 CLIP · Diffusion 기반 멀티모달 · 생성 모델을 연구했습니다.",
-      "현재 이스트소프트 EST-LAB에서 급여 · 회의록 · 근태결재 시스템을 요구사항 정의부터 아키텍처, 백엔드 · 프론트엔드, LLM 파이프라인, 배포와 운영까지 단독으로 설계 · 개발하고 있습니다. LangGraph 기반 에이전트, 하이브리드 RAG, 사내 GPU sLLM 서빙, 출력 검증 계층을 결합해 사내 업무의 DX · AX 전환을 이끌고 있습니다.",
-      "정형 · 시계열 · 비정형 데이터를 가리지 않고 문제에 맞는 모델과 구조를 선택해, 끝까지 운영 가능한 형태로 완성하는 것을 가장 잘합니다.",
+      "삼성서울병원과 정밀의료 기업 에임드바이오에서 약물 스크리닝 · 임상 · 유전체 데이터를 통합하는 ==분석 파이프라인==을 만들며 **데이터 엔지니어링의 기본기**를 다졌고, 고려대학교 인공지능 연구실에서 ==CLIP · Diffusion 기반 멀티모달 · 생성 모델==을 연구했습니다.",
+      "현재 이스트소프트 EST-LAB에서 **급여 · 회의록 · 근태결재 시스템**을 요구사항 정의부터 아키텍처, 백엔드 · 프론트엔드, LLM 파이프라인, 배포와 운영까지 ==단독으로 설계 · 개발==하고 있습니다. LangGraph 기반 에이전트, 하이브리드 RAG, 사내 GPU sLLM 서빙, 출력 검증 계층을 결합해 ==사내 업무의 DX · AX 전환==을 이끌고 있습니다.",
+      "정형 · 시계열 · 비정형 데이터를 가리지 않고 **문제에 맞는 모델과 구조**를 선택해, ==끝까지 운영 가능한 형태==로 완성하는 것을 가장 잘합니다.",
     ],
+    core: ["LLM Agent", "RAG", "LangGraph", "sLLM", "MLOps", "Multimodal AI", "Diffusion", "Time-series", "FastAPI", "PyTorch"],
     keywords: ["LLM Agent", "RAG", "LangGraph", "sLLM", "MLOps", "Multimodal AI", "Diffusion", "Time-series"],
   },
 
   // "이런 일을 합니다"
   focus: [
-    { t: "LLM Agent & MLOps", d: "LangGraph 에이전트, 하이브리드 RAG, 사내 GPU sLLM 서빙, 회귀 평가 자동화까지 운영 가능한 LLM 파이프라인 설계", k: ["LangGraph", "RAG", "vLLM · llama.cpp", "Docker"] },
-    { t: "Multimodal & Generative AI", d: "영상 · 음성 · 텍스트 감정 인식, CLIP · Diffusion 기반 생성과 이상 탐지 모델 설계 · 학습 · 평가", k: ["PyTorch", "CLIP", "Stable Diffusion", "LoRA"] },
-    { t: "Data Science & Analytics", d: "정형 · 시계열 데이터의 통계 검증, 예측 모델링, 설명 가능한 AI로 의사결정 근거 마련", k: ["scikit-learn", "CatBoost", "SHAP · DiCE", "R"] },
-    { t: "AX Service Engineering", d: "현업 요구 정의부터 백엔드 · 프론트 · 인프라 · 배포까지, AI가 실제 업무 흐름에 들어가는 서비스 구축", k: ["FastAPI", "React · Next.js", "PostgreSQL", "SSO"] },
+    {
+      t: "LLM Agent & MLOps",
+      d: "LangGraph 에이전트, 하이브리드 RAG, 사내 GPU sLLM 서빙, 회귀 평가 자동화까지 운영 가능한 LLM 파이프라인 설계",
+      k: ["LangGraph", "RAG", "vLLM · llama.cpp", "Docker"],
+      icons: ["langchain", "rag", "openai", "vllm", "docker", "githubactions"],
+      intro: "업무 데이터 위에서 동작하는 ==LLM 에이전트==를 설계하고, 사내 인프라에서 안정적으로 운영되도록 **배포와 평가 체계**까지 함께 구축합니다. 모델 출력은 ==결정적 코드 검증==을 통과한 것만 반영되도록 설계하는 것을 기본으로 합니다.",
+      does: [
+        "에이전트 설계: LangGraph 상태 그래프로 질문 분석, 도구 선택·실행, 결과 검증, 재계획",
+        "하이브리드 RAG: pgvector 의미 검색과 BM25 키워드 검색을 RRF로 병합",
+        "출력 검증: json_schema 구조화 출력과 결정적 검증 게이트로 환각·근거 위조 차단",
+        "sLLM 서빙: llama.cpp · vLLM 기반 사내 GPU 추론, 민감 데이터의 외부 반출 차단",
+        "평가 체계: 동일 조건 벤치마크 프로토콜과 회귀 평가셋으로 모델 선정·교체 검증",
+        "운영: Docker Compose 온프레미스 배포, 내부망 격리, 감사 로그와 되돌리기",
+      ],
+      projects: ["pms", "estory", "ai-mentor-chatbot"],
+    },
+    {
+      t: "Multimodal & Generative AI",
+      d: "영상 · 음성 · 텍스트 감정 인식, CLIP · Diffusion 기반 생성과 이상 탐지 모델 설계 · 학습 · 평가",
+      k: ["PyTorch", "CLIP", "Stable Diffusion", "LoRA"],
+      icons: ["pytorch", "huggingface", "openai", "tensorflow", "python"],
+      intro: "서로 다른 형식의 데이터를 ==하나의 표현==으로 묶고, 생성 모델이 어떤 조건을 받아 무엇을 만들지 **구조부터 설계**합니다. 연구실에서 다룬 표현 학습과 생성 모델을 ==서비스 파이프라인==으로 연결한 경험이 있습니다.",
+      does: [
+        "멀티모달 감정 인식: 영상 · 음성 · 텍스트 통합 모델 LoRA 파인튜닝과 실시간 추론 파이프라인",
+        "이미지-오믹스: 병리 슬라이드 이미지로 유전자 발현을 예측하는 멀티모달 모델",
+        "Vision-Language: 표 주석을 자연어 프롬프트로 바꿔 CLIP · MedCLIP을 의료 영상 분류에 적용",
+        "조건부 생성: 텍스트 대신 SSL 표현을 조건으로 쓰는 Stable Diffusion 구조 설계",
+        "평가 설계: FID · IS · LPIPS · UAR · WAR 등 목적에 맞는 지표 선택",
+      ],
+      projects: ["homi-ai", "mmgene", "ssl-rep-style-transfer", "rsna-lumbar-spine", "rcg-fewshot-style"],
+    },
+    {
+      t: "Data Science & Analytics",
+      d: "정형 · 시계열 데이터의 통계 검증, 예측 모델링, 설명 가능한 AI로 의사결정 근거 마련",
+      k: ["scikit-learn", "CatBoost", "SHAP · DiCE", "R"],
+      icons: ["scikitlearn", "pandas", "numpy", "r", "jupyter", "xgboost"],
+      intro: "가설을 ==통계로 먼저 검증==한 뒤 모델을 고르고, 결과를 **설명할 수 있는 형태**로 의사결정 근거를 만듭니다. 바이오 · 임상 데이터처럼 출처와 형식이 제각각인 데이터를 ==정합==하는 일에 익숙합니다.",
+      does: [
+        "가설 검증: t-test · ANOVA · Chi-square · Permutation test로 방법론 선택 전 확인",
+        "예측 모델: GBDT · CatBoost 기반 예측과 Isotonic 확률 보정",
+        "설명 가능한 AI: SHAP · DiCE로 원인 설명과 결과를 바꾸는 최소 조건 추천",
+        "시계열: Anomaly Transformer · IMDiffusion 기반 비지도 이상 탐지",
+        "바이오 데이터: 약물 반응 곡선 피팅과 임상 · 유전체 데이터 통합 분석",
+        "텍스트 마이닝: 형태소 분석 · 임베딩 · 토픽 모델링",
+      ],
+      projects: ["youth-2030-employment", "smd-anomaly-dashboard", "drug-screening-cohort", "tcga-hnsc-analysis", "onederful-jiwon-up"],
+    },
+    {
+      t: "AX Service Engineering",
+      d: "현업 요구 정의부터 백엔드 · 프론트 · 인프라 · 배포까지, AI가 실제 업무 흐름에 들어가는 서비스 구축",
+      k: ["FastAPI", "React · Next.js", "PostgreSQL", "SSO"],
+      icons: ["fastapi", "react", "nextjs", "postgresql", "docker", "typescript"],
+      intro: "현업 담당자와 ==요구사항을 직접 정의==하고, 엑셀과 수작업으로 돌아가던 업무를 시스템으로 옮긴 뒤 **그 위에 AI를 얹습니다**. 기획부터 배포 · 운영 · 인수인계까지 ==한 사람이 끝까지== 책임지는 방식으로 일해 왔습니다.",
+      does: [
+        "요구사항 정의: 업무 규칙 분석과 요구사항 · 결정 기록 문서화",
+        "풀스택 개발: FastAPI · Next.js · React",
+        "데이터 모델링: PostgreSQL 스키마 설계와 무중단 마이그레이션",
+        "보안 설계: 회사 계정 SSO · RBAC · 감사 로그",
+        "도메인 규칙: 결재 상태 전이 · 법정 연차 같은 규칙의 순수 함수화와 테스트 고정",
+        "운영 · 인수인계: 배포, 장애 대응 순서, 인수인계 문서 정리",
+      ],
+      projects: ["pms", "est-flow", "estory", "hr-ax-support"],
+    },
   ],
+
+  // Core skill tiles: one note per skill, tied to where it was actually used.
+  skill_notes: {
+    "LLM Agent": ["질문 분석부터 도구 실행, 결과 검증, 재계획까지 ==분기를 코드로 고정==한 에이전트 설계. PMS AI 서포터에서 읽기 전용 SQL 도구와 승인 카드 흐름으로 **실제 업무에 투입**.", ["pms", "ai-mentor-chatbot"]],
+    RAG: ["pgvector 의미 검색과 BM25 키워드 검색을 RRF로 병합하는 ==하이브리드 검색==. 고유명사가 많은 급여 용어처럼 의미 검색만으로는 놓치는 문서까지 **근거로 연결**.", ["pms", "ai-mentor-chatbot"]],
+    LangGraph: ["노드와 엣지 단위로 에이전트 흐름을 설계하고 재시도 · 최대 스텝 정책을 ==그래프에 명시==. 답변이 어떤 경로를 거쳤는지 **추적 가능한 구조**.", ["pms", "ai-mentor-chatbot"]],
+    sLLM: ["사내 GPU에서 llama.cpp · vLLM으로 Qwen · Kanana 계열 모델을 서빙하고 ==json_schema 강제 출력==으로 형식 오류 차단. 급여 · 회의 같은 민감 데이터의 **외부 반출 없는 추론**.", ["pms", "estory"]],
+    MLOps: ["서비스 · DB · 모델 컨테이너 분리와 ==내부망 격리==, GitHub Actions 배포, **회귀 평가셋**으로 모델 교체 전후 품질 비교.", ["pms", "estory", "homi-ai", "est-flow"]],
+    "Multimodal AI": ["영상 · 음성 · 텍스트를 함께 다루는 ==감정 인식 모델== 파인튜닝, 병리 이미지로 유전자 발현을 예측하는 **이미지-오믹스 모델** 설계.", ["homi-ai", "mmgene", "rsna-lumbar-spine"]],
+    Diffusion: ["Stable Diffusion의 텍스트 조건을 SSL 표현으로 대체하는 ==Rep-to-Image 구조== 설계, 시계열 이상 탐지에는 **IMDiffusion** 적용.", ["ssl-rep-style-transfer", "rcg-fewshot-style", "smd-anomaly-dashboard"]],
+    "Time-series": ["서버 지표 시계열의 ==비지도 이상 탐지==. 통계 검정으로 지도학습의 한계를 먼저 확인한 뒤 **재구성 기반 모델**을 비교 · 선택.", ["smd-anomaly-dashboard"]],
+    FastAPI: ["타입 검증과 API 명세 자동 생성을 활용해 업무 시스템 백엔드를 구성하고, 그 명세를 ==AI 조회 도구 정의로 재사용==.", ["pms", "estory", "homi-ai", "aidlc-rnaseq-platform"]],
+    PyTorch: ["멀티모달 · 생성 · 시계열 모델의 학습과 파인튜닝 전반, ==LoRA 파인튜닝==과 목적에 맞춘 **커스텀 손실** 설계.", ["homi-ai", "ssl-rep-style-transfer", "smd-anomaly-dashboard", "rsna-lumbar-spine"]],
+  },
 
   skills: {
     "LLM · Agent": ["LangGraph", "LangChain", "RAG (pgvector · BM25)", "OpenAI API", "vLLM", "llama.cpp", "Structured Output", "Prompt Engineering"],
@@ -47,36 +121,55 @@ window.CAREER = {
     "Backend · Frontend": ["Python", "FastAPI", "SQLAlchemy", "PostgreSQL", "TypeScript", "React", "Next.js", "Streamlit"],
   },
 
+  // Visual tech stack board (icons live in assets/icons). Resume still reads `skills`.
+  tech: [
+    { area: "LLM · Agent", en: "AI", tone: "violet", items: [
+      ["langchain", "LangGraph", "에이전트 워크플로"], ["langchain", "LangChain", "LLM 체인 구성"], ["openai", "OpenAI API", "LLM · 임베딩"],
+      ["vllm", "vLLM", "고속 LLM 서빙"], ["llamacpp", "llama.cpp", "로컬 LLM 실행"], ["rag", "RAG", "하이브리드 검색"], ["json", "Structured Output", "JSON Schema 출력"] ] },
+    { area: "MLOps · Infra", en: "Ops", tone: "lime", items: [
+      ["docker", "Docker", "컨테이너화"], ["githubactions", "GitHub Actions", "CI/CD"], ["aws", "AWS", "EC2 · 클라우드"],
+      ["caddy", "Caddy", "리버스 프록시 · TLS"], ["render", "Render", "PaaS 배포"], ["linux", "Linux", "서버 · WSL2"], ["pytest", "pytest", "테스트"] ] },
+    { area: "ML · Multimodal", en: "Model", tone: "violet", items: [
+      ["pytorch", "PyTorch", "딥러닝 학습"], ["huggingface", "Hugging Face", "모델 허브 · LoRA"], ["tensorflow", "TensorFlow", "Keras 모델"],
+      ["scikitlearn", "scikit-learn", "머신러닝"], ["xgboost", "XGBoost", "부스팅 모델"], ["pandas", "pandas", "데이터 처리"], ["r", "R", "통계 분석"] ] },
+    { area: "Backend", en: "Server", tone: "lime", items: [
+      ["python", "Python", "핵심 개발 언어"], ["fastapi", "FastAPI", "REST API"], ["sqlalchemy", "SQLAlchemy", "ORM"],
+      ["pydantic", "Pydantic", "데이터 검증"], ["postgresql", "PostgreSQL", "메인 RDBMS"], ["pgvector", "pgvector", "벡터 검색"] ] },
+    { area: "Frontend", en: "Client", tone: "violet", items: [
+      ["react", "React", "UI 라이브러리"], ["nextjs", "Next.js", "풀스택 프레임워크"], ["typescript", "TypeScript", "타입 안정성"],
+      ["tailwindcss", "Tailwind CSS", "스타일링"], ["vite", "Vite", "빌드 도구"], ["streamlit", "Streamlit", "데이터 앱"] ] },
+  ],
+
   education: [
     { school: "동의대학교", degree: "학사 (졸업)", major: "바이오의약공학 (주전공)", minor: "바이오헬스데이터학 (부전공)", period_start: "2020.03", period_end: "2024.08", gpa: "3.75 / 4.5" },
-    { school: "이스트소프트 KDT [이스트캠프] 와썹 AI 모델 개발 13기", degree: "수료", period_start: "2025.11.18", period_end: "2026.04.10" },
-    { school: "LG Aimers 5기 (Data Intelligence)", degree: "수료", period_start: "2024.07.01", period_end: "2024.08.30" },
-    { school: "패스트캠퍼스 · 의생명 빅데이터 분석", degree: "교육 이수", period_start: "2023.04", period_end: "2023.05" },
-    { school: "알고리즘랩스 · ML/DL", degree: "교육 이수", period_start: "2022.11", period_end: "2022.12" },
+    { note: "ML · DL부터 LLM까지 AI 모델 개발 과정", school: "이스트소프트 KDT [이스트캠프] 와썹 AI 모델 개발 13기", degree: "수료", period_start: "2025.11.18", period_end: "2026.04.10" },
+    { note: "제조 데이터 이상 판별 해커톤", school: "LG Aimers 5기 (Data Intelligence)", degree: "수료", period_start: "2024.07.01", period_end: "2024.08.30" },
+    { note: "의생명 빅데이터 통계 · 머신러닝", school: "패스트캠퍼스 · 의생명 빅데이터 분석", degree: "교육 이수", period_start: "2023.04", period_end: "2023.05" },
+    { note: "ML/DL EDA · 이미지 매칭 실습", school: "알고리즘랩스 · ML/DL", degree: "교육 이수", period_start: "2022.11", period_end: "2022.12" },
   ],
 
   certificates: [
-    { name: "ADsP (데이터분석 준전문가)", issuer: "한국데이터산업진흥원", date: "2026.03" },
-    { name: "DSAC 데이터사이언티스트 능력인증 2급 (전문가)", issuer: "한국생산성본부(KPC)", date: "2022.10" },
-    { name: "DSAC 데이터사이언티스트 능력인증 3급 (프로그래머)", issuer: "한국생산성본부(KPC)", date: "2021.11" },
-    { name: "TOEIC 770", issuer: "YBM", date: "2024.11" },
-    { name: "자동차운전면허 2종 보통", issuer: "경찰청", date: "2020.01" },
+    { note: "데이터 분석 준전문가 자격", name: "ADsP (데이터분석 준전문가)", issuer: "한국데이터산업진흥원", date: "2026.03" },
+    { note: "데이터 사이언스 실무 전문가 인증", name: "DSAC 데이터사이언티스트 능력인증 2급 (전문가)", issuer: "한국생산성본부(KPC)", date: "2022.10" },
+    { note: "데이터 분석 프로그래밍 인증", name: "DSAC 데이터사이언티스트 능력인증 3급 (프로그래머)", issuer: "한국생산성본부(KPC)", date: "2021.11" },
+    { note: "영어 능력", name: "TOEIC 770", issuer: "YBM", date: "2024.11" },
+    { note: "운전면허", name: "자동차운전면허 2종 보통", issuer: "경찰청", date: "2020.01" },
   ],
 
   awards: [
-    { title: "[이스트캠프] 와썹 AI 모델 개발 13회차 1차 프로젝트 대상", issuer: "이스트소프트", date: "2026.04.10", project_id: "youth-2030-employment" },
-    { title: "[이스트캠프] 와썹 AI 모델 개발 13회차 2차 프로젝트 대상", issuer: "이스트소프트", date: "2026.04.10", project_id: "smd-anomaly-dashboard" },
-    { title: "이달의 러너 ([이스트캠프] 와썹 AI 모델 개발 13회차)", issuer: "이스트소프트", date: "2026.04.10" },
-    { title: "2022 통합성과경진대회 캡스톤 시작품 대상", issuer: "동의대학교, 교육부", date: "2022.11.25", project_id: "bioplastic-capstone" },
-    { title: "2021 전국 대학생 소셜벤처 콩쿠르 우수작 선정", issuer: "사회적경제 대학협의회장", date: "2021.11.18", project_id: "healthfood-matching-app" },
-    { title: "제2회 창의융합 메이커톤 경진대회 최우수상", issuer: "중소벤처기업청장", date: "2021.09.15", project_id: "healthfood-matching-app" },
-    { title: "2021 학생창업유망팀 300 예비창업 우수팀 Top 10 선정", issuer: "과학기술정보통신부, 교육부", date: "2021.08.30", project_id: "healthfood-matching-app" },
+    { note: "청년 고용 데이터 분석 · 서비스 제안", title: "[이스트캠프] 와썹 AI 모델 개발 13회차 1차 프로젝트 대상", issuer: "이스트소프트", date: "2026.04.10", project_id: "youth-2030-employment" },
+    { note: "서버 시계열 이상 탐지 대시보드", title: "[이스트캠프] 와썹 AI 모델 개발 13회차 2차 프로젝트 대상", issuer: "이스트소프트", date: "2026.04.10", project_id: "smd-anomaly-dashboard" },
+    { note: "과정 중 우수한 성취로 선정", title: "이달의 러너 ([이스트캠프] 와썹 AI 모델 개발 13회차)", issuer: "이스트소프트", date: "2026.04.10" },
+    { note: "생분해성 바이오 플라스틱 시작품", title: "2022 통합성과경진대회 캡스톤 시작품 대상", issuer: "동의대학교, 교육부", date: "2022.11.25", project_id: "bioplastic-capstone" },
+    { note: "건강기능식품 매칭 창업 아이디어", title: "2021 전국 대학생 소셜벤처 콩쿠르 우수작 선정", issuer: "사회적경제 대학협의회장", date: "2021.11.18", project_id: "healthfood-matching-app" },
+    { note: "생활패턴 기반 건강기능식품 매칭", title: "제2회 창의융합 메이커톤 경진대회 최우수상", issuer: "중소벤처기업청장", date: "2021.09.15", project_id: "healthfood-matching-app" },
+    { note: "예비창업 우수팀 상위 10팀", title: "2021 학생창업유망팀 300 예비창업 우수팀 Top 10 선정", issuer: "과학기술정보통신부, 교육부", date: "2021.08.30", project_id: "healthfood-matching-app" },
   ],
 
   publications_patents: [
-    { type: "논문 (단독 저자)", title: "Multi-modal MLP DL model for mRNA-Seq expression prediction using transfer learned histopathologic image feature extraction", date: "2024", project_id: "mmgene" },
-    { type: "학회 포스터 (공동저자)", title: "Abstract 2553: Functional precision medicine as a valid tool in glioblastoma clinical practice", venue: "AACR Annual Meeting 2024", date: "2024.03.22", project_id: "drug-screening-cohort" },
-    { type: "특허 출원 (공동)", title: "천연추출물 및 효소를 이용한 생분해성 바이오 플라스틱 조성물 및 이를 이용한 바이오 플라스틱 제조방법", number: "10-2023-0014442", date: "2023.02.02", project_id: "bioplastic-capstone" },
+    { note: "병리 이미지로 유전자 발현 예측", type: "논문 (단독 저자)", title: "Multi-modal MLP DL model for mRNA-Seq expression prediction using transfer learned histopathologic image feature extraction", date: "2024", project_id: "mmgene" },
+    { note: "교모세포종 기능 정밀의학 검증", type: "학회 포스터 (공동저자)", title: "Abstract 2553: Functional precision medicine as a valid tool in glioblastoma clinical practice", venue: "AACR Annual Meeting 2024", date: "2024.03.22", project_id: "drug-screening-cohort" },
+    { note: "천연추출물 · 효소 생분해 소재", type: "특허 출원 (공동)", title: "천연추출물 및 효소를 이용한 생분해성 바이오 플라스틱 조성물 및 이를 이용한 바이오 플라스틱 제조방법", number: "10-2023-0014442", date: "2023.02.02", project_id: "bioplastic-capstone" },
   ],
 
   activities: [
@@ -97,6 +190,7 @@ window.CAREER = {
     /* ───────────────────────────── EST-LAB ───────────────────────────── */
     {
       id: "estlab",
+      logo: "assets/img/orgs/estsoft.png",
       name: "이스트소프트 EST-LAB",
       name_en: "ESTsoft EST-LAB",
       short: "ESTsoft EST-LAB",
@@ -106,13 +200,15 @@ window.CAREER = {
       period_start: "2026.07",
       period_end: "현재",
       location: "서울",
-      one_liner: "사내 업무의 DX · AX 전환: 급여 · 회의록 · 근태결재 시스템 단독 개발, 사내 챗봇 · 인사평가 보조",
+      one_liner: "사내 업무의 DX · AX 전환: 급여 · 회의록 · 근태결재 시스템 단독 개발, 알툴즈 미니게임 플랫폼 진행 중, 인사 시스템 AX 보조",
       description: "현업 담당자와 요구사항 직접 정의, 기획부터 아키텍처 · 풀스택 · AI 파이프라인 · 인프라 · 배포까지 전 과정 담당.",
       projects: [
         {
           id: "pms",
           product_name: "PMS",
-          title: "PMS 급여관리 시스템 DX · AX 전환",
+          title: "급여관리 시스템 DX · AX 전환",
+          images: ["assets/projects/pms-1.jpg", "assets/projects/pms-2.jpg", "assets/projects/pms-3.jpg", "assets/projects/pms-4.jpg"],
+          captions: ["PMS 대시보드 화면", "AS-IS → DX → AX 단계적 전환", "시스템 구성", "기술 스택"],
           tagline: "Payroll Maintenance System · 엑셀 급여 업무의 DX · AX 전환",
           period: "2026.07 ~ 2026.09",
           role: "단독 개발 · 기획 · 설계 · 백엔드 · 프론트 · AI · 인프라 · 배포",
@@ -125,10 +221,6 @@ window.CAREER = {
             ["결정은 사람", "AI는 조회 · 감시 · 제안까지, 실제 반영은 담당자 승인"],
             ["데이터는 사내", "급여 금액 · 이름이 실리는 추론은 사내 GPU sLLM에서만 처리"],
           ],
-          support: {
-            t: "함께 진행: 사내 규정 RAG 챗봇 ‘소프트콘’",
-            d: "사내 노션 규정 문서를 근거로 출처 · 문의처와 함께 답하는 웹 · Teams 챗봇. 팀 프로젝트에 보조로 참여, 기획 · 검토 지원.",
-          },
           bg: [
             "급여 규칙이 엑셀 수식과 담당자 기억에만 존재",
             "인사 변동 자료가 구글시트 · 공단 고지 파일 · ERP · 개인 파일로 분산",
@@ -209,7 +301,7 @@ window.CAREER = {
         {
           id: "estory",
           product_name: "ESTory",
-          title: "ESTory 사내 sLLM 회의록 자동화",
+          title: "사내 sLLM 회의록 자동화",
           tagline: "회의 전사 · 녹음 → 사내 sLLM 요약 → 근거 검증 → 주최자 승인 → Teams 게시",
           period: "2026.09 ~ 2026.10",
           role: "단독 개발 · 기획 · 모델 선정 · 백엔드 · 프론트 · STT · 인프라 설계",
@@ -279,6 +371,11 @@ window.CAREER = {
             ["3.0분", "회의 종료 → 회의록", "48분 회의, 노트북 CPU"],
             ["0.555 → 0.679", "ROUGE-1", "주제 분할 Map-Reduce"],
           ],
+          ax_next: [
+            ["LangGraph 회의 후속 에이전트", "결정 · 할 일을 Teams 플래너 · 캘린더 작업 제안으로 연결, 담당자 승인 후 등록"],
+            ["회의록 RAG 검색", "과거 회의록을 pgvector로 색인해 ‘지난번에 뭐라고 결정했지?’ 질의응답"],
+            ["화자별 요약 · 발언 통계", "화자 구분 결과로 참석자별 요약과 발언 비중 리포트"],
+          ],
           impact: [
             "회의 직후 근거 달린 회의록: 작성 부담 감소, 결정 · 할 일 누락 방지",
             "사내 정보 외부 반출 없는 생성형 AI 활용 모델 확보",
@@ -289,102 +386,211 @@ window.CAREER = {
         {
           id: "est-flow",
           product_name: "EST-flow",
-          title: "EST-flow 근태 · 전자결재 시스템",
-          tagline: "근무지 IP 출퇴근 · 법정 연차 자동 발생 · 품의서 전자결재를 하나로",
+          title: "근태 · 전자결재 시스템",
+          tagline: "광주 인공지능 사관학교 운영진 · 교육생의 출퇴근 · 연차 · 품의 결재를 한 곳에서",
           period: "2026.10",
-          role: "단독 개발 · 명세 해석 · MVP 범위 제안 · 풀스택 · 배포",
+          role: "단독 개발 · 명세 해석 · MVP 범위 제안 · 풀스택 · 배포 · 인수인계",
           featured: true,
-          tags: ["풀스택", "Next.js", "전자결재", "멀티테넌트", "SaaS"],
-          tech: ["TypeScript", "Next.js", "React", "Tailwind CSS", "shadcn/ui", "Tiptap", "PostgreSQL", "Prisma", "Auth.js", "Entra ID", "Zod", "ipaddr.js", "argon2", "Render", "GitHub Actions", "Vitest", "Playwright"],
-          define: "근무지 IP 기반 출퇴근, 근로기준법 기준 연차 자동 발생, 품의서 전자결재를 하나로 묶은 멀티테넌트 근태 · 결재 시스템",
+          tags: ["풀스택", "Next.js", "전자결재", "멀티테넌트"],
+          tech: ["TypeScript", "Next.js", "React", "Tailwind CSS", "PostgreSQL", "Prisma", "Auth.js", "Google OAuth", "Microsoft Entra ID", "Argon2", "Zod", "ipaddr.js", "ExcelJS", "Cloudflare", "Render", "GitHub Actions", "Vitest", "Playwright"],
+          images: ["assets/projects/est-flow-1.jpg", "assets/projects/est-flow-2.jpg", "assets/projects/est-flow-3.jpg", "assets/projects/est-flow-4.jpg"],
+          captions: ["EST-flow 시스템 아키텍처", "서비스 한눈에 보기", "문제 정의와 해결 방안", "DB 스키마 관계도"],
+          define: "광주 인공지능 사관학교 운영진 · 교육생의 출퇴근 · 연차 · 품의 결재를 한 곳에서 처리하는 웹 근태 · 결재 시스템",
           values: [
-            ["결재 = 근태 반영", "승인과 후속 처리(연차 확정 · 외근 해제 · 근태 수정)를 한 트랜잭션으로"],
-            ["위조 어려운 기록", "신뢰 프록시 기준 접속 IP 판정, VPN 사무실 인정 불가"],
-            ["확장 전제 설계", "모든 데이터 company_id 분리, 회사별 설정값"],
+            ["투명한 출결", "근무지 네트워크에서만 출퇴근 기록, 외근은 결재로 허용, 위치 · 시각 근거가 남는 출결"],
+            ["규칙 기반 자동 계산", "연차 발생 · 차감 · 소멸, 영업일, 근무시간을 규칙 함수가 계산"],
+            ["빠른 결재", "담당 운영진 결재선, 화면 · 알림으로 바로 처리, 회수 · 취소 · 대결까지 한 흐름"],
+            ["남는 기록", "모든 변경을 수정 · 삭제 불가한 이력으로 기록, 필요한 사람에게 개인별 알림"],
           ],
           bg: [
-            "출퇴근 · 연차 · 결재의 분리 관리: 외근 · 연차 결재 결과가 근태에 미반영",
-            "위조 가능한 접속 정보와 수작업 수정으로 떨어지는 기록 신뢰도",
-            "법정 연차 · 영업일 · 결재 상태 전이처럼 실수하기 쉬운 규칙",
+            "출석부 · 메신저로 출퇴근 확인, 실제 교육장 출석 여부 확인 불가",
+            "메신저 · 메일로 흩어진 결재 요청, 승인 여부 · 이력 추적 어려움",
+            "연차 발생 · 소멸 · 잔여를 매번 직접 계산, 기준 혼선",
+            "누가 언제 무엇을 바꿨는지 남지 않아 분쟁 대응 어려움",
+            "flex · Shiftee 같은 HR 서비스의 근태 · 결재만 가볍게, 교육생을 회사처럼 관리하는 방향",
           ],
-          decision: "규칙은 순수 함수로, 부수효과는 트랜잭션으로",
+          pains: [
+            ["출석 확인 수작업", "위치 확인 불가", "근무지 IP 판정 출퇴근, 허용 · 거절 시도 모두 기록"],
+            ["외근 중 출퇴근 불가", "예외 처리 수작업", "외근 품의 승인 시 그날 IP 제한 해제, 미기록 자동 입력, 사후 품의"],
+            ["결재 분산", "추적 불가", "상태 전이표 · 결재선 · 회수 · 승인 후 취소 · 대결 · 문서 번호를 갖춘 결재 엔진"],
+            ["연차 수동 계산", "기준 혼선", "자동 발생 · 영업일 차감 · 소멸 · 소멸 예정 알림"],
+            ["근거 없음", "분쟁 대응 불가", "추가만 가능한 변경 이력, 알림함 + 메일 개인별 알림"],
+            ["역할 구분 없음", "권한 혼재", "교육생 · 매니저 · 운영진 · 시스템 관리자 권한 분리"],
+          ],
+          decision: "규칙은 순수 함수로, 부수효과는 한 트랜잭션으로",
           points: [
-            "계층 분리: 화면 → API(인증 · 요청 해석) → 서비스(권한 · 트랜잭션 · 이력 · 알림) → 도메인(현재 시각 주입 순수 함수)",
-            "X-Forwarded-For를 뒤에서 신뢰 프록시 수만큼 거슬러 읽는 IP 판정",
-            "결재 상태 전이표 밖 변경 거부, 상태 변경 · 후속 처리 · 이력 · 알림 적재를 한 트랜잭션으로",
-            "알림은 DB 우선 적재, 메일은 커밋 후 별도 발송 · 재시도: 메일 실패가 결재를 막지 않도록",
-            "배치는 전부 멱등, 마지막 처리일부터 오늘까지 따라잡기",
-            "명세와 다르게 정한 사항은 결정 기록으로 남겨 PM과 공유",
+            "접속 IP는 Cloudflare가 덮어쓰는 한 칸 헤더만 신뢰, 앞쪽 값 위조 차단",
+            "권한은 서버에서 매번 확인: 로그인 → 역할 → 대상 소유자, 화면 버튼 숨김은 편의일 뿐",
+            "계산은 규칙 함수(순수 함수 + 테스트) 한 곳에서",
+            "상태 변경 + 양식 후속 처리 + 변경 이력 + 알림 쌓기 = 한 트랜잭션",
+            "모든 조회 · 저장은 로그인 사용자의 회사(company_id) 범위로",
+            "변경 이력은 추가만, DB 트리거로 수정 · 삭제 거부",
+            "메일은 커밋 뒤 따로 발송, 메일 실패가 결재를 막지 않도록",
+          ],
+          asis: [
+            ["출퇴근", "출석부 · 메신저 확인", "근무지 네트워크에서 버튼 기록, 허용 · 거절 시도 로그"],
+            ["외근", "예외 수작업 처리", "외근 품의 승인 시 IP 제한 해제, 미기록 자동 입력"],
+            ["결재", "메신저 · 메일 요청", "양식 5종 · 결재선 · 회수 · 대결 · 문서함"],
+            ["연차", "직접 계산", "가입일 기준 자동 발생 · 영업일 차감 · 소멸 알림"],
+            ["이력", "남지 않음", "모든 변경을 수정 불가 이력으로 기록"],
           ],
           stack: [
-            ["프론트 · API", "Next.js App Router · React · Tailwind · shadcn/ui", "화면 · API 한 저장소, 모바일 웹 대응"],
-            ["인증", "Auth.js · Entra ID · Google OAuth · argon2", "사내 계정 · 외부 계정 동시 지원, 가입 신청 · 승인 흐름"],
-            ["데이터", "PostgreSQL · Prisma", "스키마 · 마이그레이션 일원화, 부분 고유 인덱스, 문서 번호 행 잠금 채번"],
-            ["검증", "Zod · DOMPurify · ipaddr.js", "입력 검증, 본문 정화, CIDR 판정"],
-            ["배포", "Render Blueprint · GitHub Actions · Docker", "빠른 운영 배포 + 스케줄 배치 호출"],
-            ["테스트", "Vitest · Playwright", "명세 TC 번호 기준 단위 · E2E"],
+            ["화면", "Next.js App Router · React · Tailwind CSS", "화면 · API · 배치 API를 한 서버, 배포 단위 하나 · 언어 하나"],
+            ["서버 · API", "TypeScript · Route Handlers · Zod · date-fns-tz", "요청 검증, 서울 시간 · 영업일 · 근무일 계산"],
+            ["데이터", "PostgreSQL · Prisma · DB 트리거", "결재 · 연차처럼 정합성이 중요한 데이터, 트랜잭션 · 행 잠금 · 고유 제약"],
+            ["인증 · 보안", "Auth.js · Google · Microsoft Entra ID · Argon2 · ipaddr.js", "교육생 Gmail · 이스트소프트 계정 로그인, 근무지 CIDR 판정"],
+            ["배포 · 운영", "Cloudflare · Render · GitHub Actions", "실제 접속 IP 전달, 운영 부담이 작은 구성, 매일 배치 호출"],
+            ["테스트", "Vitest · Playwright · ESLint", "규칙 함수를 명세 TC 번호 그대로 테스트, 화면 확인"],
           ],
           arch: [
-            ["프론트엔드", ["Next.js App Router", "Tiptap 표 편집기", "모바일 웹 대응"]],
-            ["API · 서비스", ["Route Handler + 오류 래퍼", "서버 측 RBAC", "변경 이력 · 알림함"]],
-            ["도메인", ["영업일 · 공휴일", "연차 발생 · 차감 · 소멸 (근로기준법 제60조)", "IP/CIDR 판정", "근무시간 · 주 52시간 경고", "문서 상태 전이 · 결재선 · 대결"]],
-            ["데이터", ["PostgreSQL + Prisma", "company_id 멀티테넌트 분리", "회사 · 연도별 문서 번호"]],
-            ["배치 · 인프라", ["멱등 배치: 연차 발생 · 소멸, 외근 자동 입력, 미퇴근 확인, 메일 재전송", "Render + GitHub Actions 스케줄", "AWS 목표 구조 설계 (ECS Fargate · RDS · S3 · SES · EventBridge)"]],
+            ["앞단", ["Cloudflare: HTTPS · 실제 접속 IP를 CF-Connecting-IP 한 칸으로 전달"]],
+            ["웹 서비스", ["proxy: 로그인 쿠키 없으면 /login 안내", "화면: 보여 주기 · 입력 받기", "API: requireUser → 서비스 호출", "알림: 커밋 뒤 알림함 + 메일 발송"]],
+            ["서비스", ["권한 3단계 · 회사 범위", "한 트랜잭션: 상태 변경 · 후속 처리 · 변경 이력 · 알림"]],
+            ["규칙 함수", ["IP · 출퇴근 판정", "근무시간 · 주간 경고", "결재 상태 전이 · 결재선 · 대결", "연차 발생 · 차감 · 소멸 · 영업일"]],
+            ["데이터 · 배치", ["Render PostgreSQL, 회사 단위 분리", "변경 이력 수정 · 삭제 거부 트리거", "GitHub Actions 매일 배치 → 배치 API (멱등 · 따라잡기)"]],
           ],
+          flow: "로그인 → 출퇴근 기록 → 품의 상신 → 담당 운영진 결재 → 후속 처리 · 알림 → 현황 · 이력",
           pipes: [
-            ["출퇴근", ["출퇴근 버튼", "접속 IP 판정", "근무지 · 외근 허용 확인", "기록 · 시도 로그", "미퇴근 · 주 52시간 경고"], ""],
-            ["전자결재", ["품의서 상신", "순차 결재", "승인 후속 처리", "변경 이력", "알림 적재", "커밋 후 메일 발송"], "회수 · 승인 후 취소 · 대결 지원"],
-            ["야간 배치", ["마지막 처리일 확인", "오늘까지 따라잡기", "연차 발생 · 소멸", "외근 미기록 자동 입력", "메일 재전송"], "몇 번을 돌려도 같은 결과"],
+            ["출근 버튼 한 번의 흐름", ["버튼 클릭", "실제 IP 확인", "로그인 쿠키 확인", "API 인증 · 차단", "근무지 · 외근 판정", "기록 · 시도 · 이력 저장", "알림"], ""],
+            ["결재 문서 상태", ["임시 저장", "상신", "진행 중", "승인 완료 / 반려 / 회수", "취소"], "상태 전이표 밖 변경 거부, 승인 순간 후속 처리 + 변경 이력 + 알림"],
+            ["매일 배치", ["연차 발생 · 소멸", "대결 시작 알림", "외근 자동 입력", "만료 링크 정리", "미퇴근 확인", "소멸 예정 알림"], "회사 단위 · 멱등, 마지막 처리일부터 따라잡기"],
+          ],
+          notes: [
+            "역할: 교육생 · 매니저 · 운영진 · 시스템 관리자, 직급이 곧 역할",
+            "가입: Google 계정 가입 또는 이메일 가입 후 운영진 승인, 이스트소프트 계정은 첫 로그인 시 가입 신청 자동 등록",
+            "명세와 다르게 정한 사항(AWS 대신 Render 등)은 결정 기록으로 남겨 PM과 공유",
           ],
           kpis: [
             ["약 9일", "MVP → 운영 배포", "명세상 1인 11~18주 규모 1차 범위 중 핵심 흐름"],
             ["145개", "테스트 케이스", "명세 TC 기준 단위 + E2E"],
           ],
+          ax_next: [
+            ["결재 보조 에이전트", "품의 본문 초안 작성 · 누락 항목 검사를 LLM이 제안, 상신은 사람이"],
+            ["근태 이상 탐지", "지각 · 미퇴근 · 주간 초과 패턴을 규칙 + 통계로 탐지해 운영진 알림"],
+            ["자연어 현황 조회", "‘이번 주 미퇴근 교육생’ 같은 질문을 읽기 전용 SQL 도구로 답변, PMS 구조 재사용"],
+          ],
           impact: [
-            "근태 · 연차 · 결재 일원화: 결재 결과의 자동 근태 반영",
-            "법정 규칙을 테스트로 고정: 정책 변경 시 회귀 확인",
-            "멀티테넌트 · AWS 목표 구조로 다른 회사 확장 대비",
+            "근무지 판정 출퇴근과 외근 결재 연동으로 출결 근거 확보",
+            "결재 진행 상황을 화면 · 알림으로 한눈에, 결재 결과가 근태에 자동 반영",
+            "법정 연차 · 영업일 규칙을 테스트로 고정해 정책 변경 시 회귀 확인",
+            "회사 단위 분리 구조로 다른 조직 확장 대비",
           ],
         },
         {
-          id: "estimate",
-          product_name: "ESTimate",
-          title: "ESTimate 계열사 공용 인사평가 플랫폼",
-          tagline: "동료 · 리더십 · 성과평가 웹 서비스 · 협업 기록 기반 평가자 추천 연구",
-          period: "2026.07 ~ 2026.10",
-          role: "보조 · 팀 프로젝트 기획 · 검토 지원",
-          tags: ["HR Tech", "추천 시스템", "동료평가"],
-          tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "shadcn/ui", "Python", "Express", "Prisma", "PostgreSQL", "OpenAI"],
-          define: "계열사가 함께 쓰는 인사평가 플랫폼: 평가자 지정 · 리더 승인 · 평가 · 관리자 리포트까지 평가 사이클 전체 지원",
+          id: "altools-games",
+          product_name: "ALTools GAMES",
+          title: "설치 없이 바로 하는 알툴즈 미니게임 플랫폼",
+          tagline: "앱인알툴즈 · 알툴즈 안의 미니게임 공간, 진행 중",
+          period: "2026.10 ~ 진행 중",
+          role: "기획 · 플랫폼 설계 및 개발",
+          featured: true,
+          tags: ["기획", "웹 플랫폼", "게임", "슈퍼앱"],
+          tech: ["JavaScript", "HTML · CSS", "iframe 분리 실행", "게임 SDK", "Render"],
+          links: { "Live Demo": "https://altools-games.onrender.com/" },
+          images: ["assets/projects/altools-games-1.jpg", "assets/projects/altools-games-2.jpg"],
+          captions: ["웹 버전 게임 홈", "모바일 화면"],
+          define: "알툴즈 사용자가 설치 · 가입 없이 알툴즈 안에서 바로 1~3분 플레이하는 미니게임 플랫폼. 앱인토스의 미니게임을 알툴즈판으로",
           values: [
-            ["외부 SaaS 대체", "계열사 공용 평가 회차 운영"],
-            ["근거 있는 추천", "협업 기록을 평가자 후보의 근거로 첨부, 선택은 본인"],
-            ["규칙 기반 안전장치", "같은 조직 · 상호 평가 · 부담 쏠림 제한"],
+            ["머무는 서비스", "쓰고 닫는 도구에서 머물고 다시 찾는 서비스로 전환"],
+            ["바로 플레이", "설치 · 가입 없이 게스트로 즉시 실행"],
+            ["안전한 분리", "게임별 분리 실행, 알툴즈 계정 · 쿠키 접근 차단"],
           ],
           bg: [
-            "본인 지명 + 리더 승인 방식에서 구조적으로 생기는 상호 맞지명 · 같은 팀 집중 · 특정 평가자 부담 쏠림",
+            "작업이 끝나면 바로 닫는 도구, 짧은 체류 시간과 다시 올 이유 부족",
+            "광고 · 신규 서비스를 붙일 자리 부족",
+            "파일 변환 대기 · 쉬는 시간처럼 알툴즈 안에서 생기는 짧은 빈 시간",
           ],
-          decision: "학습형보다 규칙형: 데이터 커버리지가 낮을 땐 설명 가능한 규칙이 우선",
+          pains: [
+            ["짧은 체류", "작업 후 바로 이탈", "작업 사이 남는 시간을 알툴즈 안에서 사용"],
+            ["재방문 이유 부족", "도구로만 인식", "기록 갱신 · 랭킹을 이유로 다시 방문"],
+            ["수익 자리 부족", "광고 노출 공간 없음", "게임 홈 · 플레이 화면에 광고 자리 확보"],
+          ],
+          decision: "알툴즈 변경은 메뉴 1칸뿐, 게임은 별도 출처에서 분리 실행",
           points: [
-            "업무 기록에서 협업 점수 산출, 평가자 후보에 협업 근거 첨부",
-            "같은 조직 배정 · 상호 평가 금지 · 1인당 상한 · 추첨 순환 규칙",
-            "합성 데이터 다중 시드 모의시험으로 배정 방식 비교, GNN 접근은 통제 실험으로 검증",
+            "알툴즈 웹 · 앱에 \"게임\" 메뉴 1칸 추가, 기존 기능 영향 없음",
+            "게임마다 별도 도메인의 iframe에서 실행, 개인정보 미제공",
+            "게임 제작자는 엔진 자유, 연결 도구(SDK)로 저장 · 랭킹만 연결 후 zip 업로드",
+            "1차 범위: 사내 제작 게임 · 게스트 이용 · 광고는 자리만",
+          ],
+          asis: [
+            ["체류", "작업 후 바로 닫음", "대기 시간에 미니게임 플레이"],
+            ["재방문", "필요할 때만 방문", "기록 · 랭킹 갱신을 위해 재방문"],
+            ["콘텐츠 확장", "개발 필요", "게임 zip 업로드만으로 추가"],
           ],
           stack: [
-            ["프론트", "React · TypeScript · Vite · Tailwind · shadcn/ui", "사원 · 팀장 · HR 역할별 대시보드"],
-            ["추천 엔진", "Python", "협업 점수 · 규칙 필터 · 드롭인 패키지"],
-            ["백엔드", "Express · Prisma · PostgreSQL", "평가 회차 · 승인 큐 · 리포트"],
+            ["플랫폼", "게임 홈 · 플레이 화면 · 운영 콘솔", "웹 · 앱 버전 공통, PC · 모바일 웹 대응"],
+            ["게임 실행", "게임별 별도 출처 iframe", "알툴즈 계정 · 쿠키와 분리"],
+            ["연결 도구", "게임 SDK (부모 창 다리, 출처 확인)", "저장 · 랭킹 · 이벤트 연결"],
+            ["저장", "게임 파일(버전별) · 게스트 사용자 · 기록 · 랭킹 · 지표", "버전 관리와 이용 지표 수집"],
           ],
           pipes: [
-            ["평가자 추천", ["협업 기록", "협업 점수 산출", "규칙 필터", "추천 근거 카드", "본인 선택 · 팀장 승인", "평가 작성", "HR 진행률 · 리마인드"], ""],
+            ["플레이어", ["알툴즈 \"게임\" 메뉴", "게임 홈", "바로 플레이", "점수 · 랭킹 반영", "다시 하기"], "설치 · 가입 없음"],
+            ["게임 제작자", ["웹 게임 제작", "SDK로 저장 · 랭킹 연결", "빌드 zip 업로드", "미리 플레이", "공개"], ""],
           ],
-          kpis: [
-            ["60 → 0%", "상호 맞지명 비율", "원칙형 배정 방식 모의시험"],
-            ["28%", "협업 기록 커버리지", "학습형 접근의 병목으로 확인"],
+          notes: [
+            "웹 버전: 알툴즈 웹 디자인 그대로, 분류 칩 · 카드형 게임 목록",
+            "앱 버전: 토스 미니게임 방식, 하단 탭 · 바로 플레이 · 바텀시트",
+            "현재 목업: 웹 · 앱 · 알툴즈 웹 메인 시안 · 운영 콘솔, 탭 러시 · 별 받기 · 숫자 터치 · 컬러 매치",
+          ],
+          ax_next: [
+            ["게임 추천", "플레이 기록 · 체류 시간 기반 개인화 추천"],
+            ["AI 게임 제작 보조", "LLM 코드 생성으로 미니게임 템플릿 제작, SDK 연결까지 자동 점검"],
+            ["운영 지표 대시보드", "이벤트 지표 요약과 이상 지표 알림"],
           ],
           impact: [
-            "평가 품앗이 구조를 규칙으로 차단",
-            "역할별 대시보드로 평가 진행 상황 실시간 파악",
+            "사용자: 대기 시간 활용, 가벼운 휴식",
+            "알툴즈: 체류 시간 · 재방문 증가, 도구에서 머무는 서비스로 인식 변화",
+            "사업: 광고 수익 기반, 슈퍼앱 확장 근거",
+            "운영: 적은 인원 · 비용으로 시작, 개발 없이 콘텐츠 확장",
+          ],
+        },
+        {
+          id: "hr-ax-support",
+          product_name: "HR AX",
+          title: "인사 시스템 AX 보조: 소프트콘 · ESTimate",
+          tagline: "사내 규정 RAG 챗봇 ‘소프트콘’과 계열사 공용 인사평가 플랫폼 ‘ESTimate’ 팀 프로젝트 보조",
+          period: "2026.07 ~ 2026.10",
+          role: "보조 · 팀 프로젝트 기획 · 검토 지원",
+          tags: ["HR AX", "RAG", "추천 시스템", "Teams"],
+          tech: ["Python", "FastAPI", "LangChain", "OpenAI API", "Pinecone", "PostgreSQL", "Notion API", "Bot Framework", "React", "TypeScript", "Prisma"],
+          define: "인사 업무 두 곳에 AI를 붙인 팀 프로젝트 보조. 사내 규정 질문에 근거와 함께 답하는 RAG 챗봇, 동료평가 평가자를 협업 기록으로 추천하는 인사평가 플랫폼",
+          values: [
+            ["근거 있는 답변", "소프트콘: 노션 규정 문서 근거 한정 답변, 출처 · 문의처 표기"],
+            ["멀티 채널", "소프트콘: 사내 SSO 웹과 Teams 봇 동시 지원"],
+            ["근거 있는 추천", "ESTimate: 협업 기록을 평가자 후보의 근거로 첨부, 선택은 본인"],
+          ],
+          bg: [
+            "노션에 흩어진 사내 규정 · 매뉴얼, 원하는 답을 찾기 어려운 직원",
+            "사내 규정에 없는 내용을 그럴듯하게 지어내는 일반 LLM",
+            "본인 지명 + 리더 승인 동료평가에서 상호 맞지명 · 같은 팀 집중 · 부담 쏠림",
+          ],
+          decision: "답은 문서 근거 안에서만, 추천은 규칙으로 안전하게",
+          points: [
+            "소프트콘: 질문 재작성 → 벡터 검색 → 리랭킹 → 근거 한정 답변 스트리밍",
+            "소프트콘: 노션 증분 동기화, 수집량 급감 시 동기화 중단 안전장치",
+            "소프트콘: 답변 실패 질문을 분류 · 묶음 처리해 문서 공백을 관리하는 대시보드",
+            "ESTimate: 협업 점수 + 같은 조직 · 상호 평가 금지 · 1인당 상한 규칙 필터",
+            "ESTimate: 합성 데이터 모의시험으로 배정 방식 비교, 학습형 접근 통제 실험",
+          ],
+          stack: [
+            ["소프트콘 RAG", "LangChain · OpenAI · Pinecone", "질문 재작성 · 리랭킹 · 근거 한정 생성"],
+            ["소프트콘 채널", "FastAPI · Bot Framework · MSAL", "웹 SSO와 Teams 봇"],
+            ["ESTimate", "React · TypeScript · Python 추천 엔진", "역할별 대시보드와 평가자 추천"],
+          ],
+          pipes: [
+            ["소프트콘", ["질문", "질문 재작성", "벡터 검색", "리랭킹", "근거 한정 답변", "출처 · 문의처 표기"], ""],
+            ["ESTimate 평가자 추천", ["협업 기록", "협업 점수", "규칙 필터", "추천 근거 카드", "본인 선택 · 팀장 승인"], ""],
+          ],
+          kpis: [
+            ["60 → 0%", "상호 맞지명 비율", "ESTimate 원칙형 배정 방식 모의시험"],
+          ],
+          ax_next: [
+            ["규정 챗봇 + 인사평가 연결", "평가 기준 · 규정 질문을 같은 RAG 지식베이스로 응답"],
+            ["평가 코멘트 요약", "서술형 응답을 sLLM으로 요약, 원문 근거 연결"],
+          ],
+          impact: [
+            "규정 문의 응대 부담 감소, 문서 공백을 데이터로 관리",
+            "평가 품앗이 구조를 규칙으로 차단, 계열사 공용 운영",
           ],
         },
       ],
@@ -393,6 +599,7 @@ window.CAREER = {
     /* ───────────────────────────── EST Camp ───────────────────────────── */
     {
       id: "estcamp",
+      logo: "assets/img/orgs/estsoft.png",
       name: "이스트소프트 KDT [이스트캠프] 와썹 AI 모델 개발 13기",
       name_en: "ESTsoft KDT EST Camp: AI Model Developer",
       short: "이스트캠프",
@@ -407,7 +614,7 @@ window.CAREER = {
       projects: [
         {
           id: "youth-2030-employment",
-          product_name: "청년 커리어 나침반",
+          cover_label: "청년 커리어 나침반",
           title: "2030 ‘쉬었음’ 청년 고용 데이터 분석 · 서비스 제안",
           tagline: "정형 프로젝트 · 구조적 단절 진단과 취업 회복 경로 설계",
           period: "2025.12 ~ 2026.01",
@@ -453,6 +660,10 @@ window.CAREER = {
             ["85.7%", "이직 예측 AUC-ROC", "CatBoost"],
             ["78% / 100%", "DiCE Validity / Feasibility", ""],
           ],
+          ax_next: [
+            ["상담 에이전트", "예측 · DiCE 결과를 근거로 맞춤 정책 · 행동 조건을 대화형으로 안내"],
+            ["정책 문서 RAG", "고용 정책 공고를 색인해 대상 여부 질의응답"],
+          ],
           impact: [
             "같은 예산으로 더 많은 고위험군 발굴하는 정책 타깃팅 근거",
             "개인별 보완 조건 제시로 막연한 구직 대신 구체적 행동 안내",
@@ -460,7 +671,7 @@ window.CAREER = {
         },
         {
           id: "smd-anomaly-dashboard",
-          product_name: "SMD",
+          cover_label: "SMD",
           title: "서버 시계열 이상 탐지 대시보드",
           tagline: "Diffusion · Transformer 기반 비지도 이상 탐지 · 시계열 프로젝트",
           period: "2026.01 ~ 2026.02",
@@ -505,6 +716,10 @@ window.CAREER = {
             ["약 1/2", "탐지 지연", ""],
             ["0.8 ~ 0.95", "머신별 ROC-AUC", "대부분 머신 기준"],
           ],
+          ax_next: [
+            ["LLM 장애 리포트", "이상 구간과 SHAP 원인 지표를 LLM이 운영자용 리포트로 요약"],
+            ["알림 에이전트", "이상 점수 임계 초과 시 원인 · 대응 체크리스트와 함께 알림"],
+          ],
           impact: [
             "장애 전 조기 경보: 다운타임 · 대응 비용 절감",
             "원인 지표 제시로 운영자 대응 속도 향상",
@@ -513,7 +728,7 @@ window.CAREER = {
         {
           id: "homi-ai",
           product_name: "HOMI-AI",
-          title: "HOMI-AI 멀티모달 감정 인식 케어 LLM Agent",
+          title: "멀티모달 감정 인식 케어 LLM Agent",
           tagline: "영상 · 음성 · 텍스트 감정 추론을 대화에 반영하는 독거노인 말동무",
           period: "2026.02 ~ 2026.04",
           role: "팀원 · 멀티모달 감정 인식 모델 파인튜닝 · 실시간 파이프라인 설계",
@@ -559,6 +774,10 @@ window.CAREER = {
             ["3초 이내", "대화 응답 목표 UX", "감정 추론 10~30초와 분리"],
             ["UAR · WAR", "클래스 불균형 하 균형 성능", "파인튜닝 Emotion-LLaMA 기준"],
           ],
+          ax_next: [
+            ["장기 메모리 고도화", "대화 요약 · 감정 이력을 벡터 메모리로 관리해 맥락 유지"],
+            ["보호자 리포트", "하루 감정 · 위기 신호를 LLM 요약 리포트로 보호자에게 전달"],
+          ],
           impact: [
             "단방향 모니터링에서 감정 교류형 돌봄으로",
             "위기 징후 조기 감지와 보호자 알림",
@@ -567,7 +786,7 @@ window.CAREER = {
         },
         {
           id: "ai-mentor-chatbot",
-          product_name: "Mentor",
+          cover_label: "Mentor",
           title: "멀티턴 AI 취업 멘토 챗봇",
           tagline: "개인 LLM 프로젝트 · LangChain + LangGraph + RAG",
           period: "2026",
@@ -597,7 +816,7 @@ window.CAREER = {
         },
         {
           id: "estcamp-coursework",
-          product_name: "Lab",
+          cover_label: "Lab",
           title: "부트캠프 실습 모음",
           tagline: "웹 크롤링 · 머신러닝 · CV · NLP 실습",
           period: "2025.11 ~ 2026.01",
@@ -632,7 +851,7 @@ window.CAREER = {
       projects: [
         {
           id: "ssl-rep-style-transfer",
-          product_name: "Rep2Img",
+          cover_label: "Rep2Img",
           title: "SSL 표현 조건 Style Transfer (Rep-to-Image)",
           tagline: "텍스트 없이 이미지 표현만으로 조건을 주는 Stable Diffusion",
           period: "2024.10 ~ 2025.02",
@@ -671,7 +890,7 @@ window.CAREER = {
         },
         {
           id: "rsna-lumbar-spine",
-          product_name: "RSNA",
+          cover_label: "RSNA",
           title: "RSNA 2024 요추 퇴행성 질환 분류",
           tagline: "Kaggle · CNN vs ViT vs CLIP/MedCLIP 비교",
           period: "2024.08 ~ 2024.10",
@@ -702,7 +921,7 @@ window.CAREER = {
         },
         {
           id: "rcg-fewshot-style",
-          product_name: "RCG",
+          cover_label: "RCG",
           title: "RCG 기반 Few-shot Specialist Diffusion",
           tagline: "Representation-Conditioned Generation을 활용한 few-shot 스타일 변환",
           period: "2024.09 ~ 2024.12",
@@ -731,7 +950,7 @@ window.CAREER = {
         },
         {
           id: "paper-review-winclip-clip",
-          product_name: "Review",
+          cover_label: "Review",
           title: "Vision-Language 이상 탐지 논문 리뷰",
           tagline: "WinCLIP · CLIP · Zero-Shot AD via Batch Normalization",
           period: "2024.08 ~ 2024.10",
@@ -749,7 +968,7 @@ window.CAREER = {
         },
         {
           id: "paper-review-diffusion",
-          product_name: "Review",
+          cover_label: "Review",
           title: "Diffusion · 의료 영상 논문 리뷰",
           tagline: "Specialist Diffusion · REPA · RCG · Stem · DiffDGSS",
           period: "2024.10 ~ 2025.02",
@@ -787,7 +1006,7 @@ window.CAREER = {
         {
           id: "mmgene",
           product_name: "MMgene",
-          title: "MMgene 병리 이미지 기반 유전자 발현 예측",
+          title: "병리 이미지 기반 유전자 발현 예측",
           tagline: "Transfer-learned 병리 feature × Multi-modal MLP · 단독 저자 논문",
           period: "2024.03 ~ 2024.08",
           role: "단독 연구 · 논문 단독 저자",
@@ -825,6 +1044,10 @@ window.CAREER = {
             ["0.797 vs 0.336", "평균 Pearson R", "상관계수 2배 이상"],
             ["0.482 vs 0.668", "평균 MAE", ""],
           ],
+          ax_next: [
+            ["멀티모달 확장", "병리 이미지 + 임상 텍스트를 함께 쓰는 Vision-Language 모델 비교"],
+            ["연구 보조 에이전트", "예측 유전자 군집을 문헌 검색 RAG로 해석 보조"],
+          ],
           impact: [
             "MAP2K1 · NRAS · KRAS 등 MAPK/ERK 경로 유전자 군집 확인: 예측의 생물학적 타당성",
             "병리 이미지 기반 저비용 발현 스크리닝 가능성",
@@ -832,7 +1055,7 @@ window.CAREER = {
         },
         {
           id: "aidlc-rnaseq-platform",
-          product_name: "AI-DLC",
+          cover_label: "AI-DLC",
           title: "AI-DLC 기반 RNA-seq 분석 플랫폼",
           tagline: "AI 코딩 에이전트 개발 방법론 실습 · TCGA/GTEx 시각화 웹앱",
           period: "2026.07",
@@ -858,7 +1081,7 @@ window.CAREER = {
         {
           id: "onederful-jiwon-up",
           product_name: "지원 UP!",
-          title: "지원 UP! 청년 취업 지원 통합 서비스",
+          title: "청년 취업 지원 통합 서비스",
           tagline: "텍스트 마이닝 기반 신규 가치 분석",
           period: "2025",
           role: "팀 프로젝트",
@@ -879,7 +1102,7 @@ window.CAREER = {
         },
         {
           id: "lg-aimers-product-anomaly",
-          product_name: "LG Aimers",
+          cover_label: "LG Aimers",
           title: "LG Aimers 해커톤 제품 이상 판별",
           tagline: "Data Intelligence 과정",
           period: "2024.07 ~ 2024.08",
@@ -895,6 +1118,7 @@ window.CAREER = {
     /* ───────────────────────────── AIMEDBIO ───────────────────────────── */
     {
       id: "aimedbio",
+      logo: "assets/img/orgs/aimedbio.png",
       name: "(주)에임드바이오",
       name_en: "AIMEDBIO",
       short: "에임드바이오",
@@ -909,7 +1133,7 @@ window.CAREER = {
       projects: [
         {
           id: "drug-screening-cohort",
-          product_name: "DRP",
+          cover_label: "DRP",
           title: "약물 반응 분석 파이프라인 · 코호트 데이터 구축",
           tagline: "4-parameter DRC · AUC · Z-score 기반 환자별 약물 반응 분류",
           period: "2023.07 ~ 2024.02",
@@ -946,6 +1170,10 @@ window.CAREER = {
             ["50%+", "환자 리포트 생성 증가", "전년 대비"],
             ["AACR 2024", "학회 포스터 공동저자", "Functional precision medicine in glioblastoma"],
           ],
+          ax_next: [
+            ["리포트 자동 초안", "환자별 AUC · Z-score와 NGS 결과로 튜머보드 리포트 초안 생성"],
+            ["레퍼런스 질의", "코호트 DB를 자연어로 조회하는 읽기 전용 SQL 도구"],
+          ],
           impact: [
             "소프트웨어 적용용 레퍼런스 데이터 · 메타데이터 DB 확보",
             "암종별 약물 반응 분포와 유전체 발현 상관 도출",
@@ -953,7 +1181,7 @@ window.CAREER = {
         },
         {
           id: "tcga-hnsc-analysis",
-          product_name: "TCGA",
+          cover_label: "TCGA",
           title: "TCGA 두경부암 바이오마커 분석",
           tagline: "RNA-seq · 변이 · 임상 데이터 통합, 생존 분석",
           period: "2023.07 ~ 2024.02",
@@ -972,7 +1200,7 @@ window.CAREER = {
         },
         {
           id: "drug-synergy-stat",
-          product_name: "ZIP",
+          cover_label: "ZIP",
           title: "약물 병용 효과 통계 분석",
           tagline: "Dose Response Matrix · 단백질 발현 상관 · ZIP 시너지",
           period: "2023.07 ~ 2024.02",
@@ -991,7 +1219,7 @@ window.CAREER = {
         },
         {
           id: "tumor-board-report",
-          product_name: "Board",
+          cover_label: "Board",
           title: "튜머보드 약물 스크리닝 케이스 리포트",
           tagline: "대학병원 임상의 협업 정기 발표",
           period: "2023.07 ~ 2024.02",
@@ -1009,7 +1237,7 @@ window.CAREER = {
         },
         {
           id: "gbm-pdc-research",
-          product_name: "GBM",
+          cover_label: "GBM",
           title: "뇌교모세포종 약물-전사체 변화 지도 연구",
           tagline: "신약 후보 효능 · 유전체 분석, 소아고형암 스크리닝 적용",
           period: "2023.07 ~ 2024.02",
@@ -1029,6 +1257,7 @@ window.CAREER = {
     /* ───────────────────────────── SMC ───────────────────────────── */
     {
       id: "samsung-medical-center",
+      logo: "assets/img/orgs/smc.png",
       name: "삼성서울병원 미래의학관",
       name_en: "Samsung Medical Center",
       short: "삼성서울병원",
@@ -1043,7 +1272,7 @@ window.CAREER = {
       projects: [
         {
           id: "smc-cohort-bigdata",
-          product_name: "Cohort",
+          cover_label: "Cohort",
           title: "난치성 암 코호트 임상-약물-유전체 데이터 정합",
           tagline: "정밀 의료를 위한 데이터 QC · 통합",
           period: "2023.02 ~ 2023.06",
@@ -1062,7 +1291,7 @@ window.CAREER = {
         },
         {
           id: "smc-pdc-biobank",
-          product_name: "PDC",
+          cover_label: "PDC",
           title: "환자유래세포 실험 · 인체유래물 처리",
           tagline: "Primary cell · 검체 분할 · 바이오뱅킹",
           period: "2023.02 ~ 2023.06",
@@ -1097,7 +1326,7 @@ window.CAREER = {
       projects: [
         {
           id: "oncolytic-virus",
-          product_name: "OV",
+          cover_label: "OV",
           title: "종양살상 바이러스 기반 신약 발굴",
           tagline: "국가 R&D · 난치성 종양 완치율 향상을 위한 신규 종양살상 바이러스",
           period: "2021.12 ~ 2023.01",
@@ -1116,7 +1345,7 @@ window.CAREER = {
         },
         {
           id: "pnu-histology",
-          product_name: "IHC",
+          cover_label: "IHC",
           title: "종양 조직 염색 분석",
           tagline: "IHC · TUNEL · Hematoxylin 조직 슬라이드 염색",
           period: "2021.12 ~ 2023.01",
@@ -1134,7 +1363,7 @@ window.CAREER = {
         },
         {
           id: "pnu-invivo",
-          product_name: "In vivo",
+          cover_label: "In vivo",
           title: "마우스 종양 모델 in vivo 실험",
           tagline: "투여 경로별 주사 · 종양 측정 · 해부 · 장기 보관",
           period: "2021.12 ~ 2023.01",
@@ -1152,7 +1381,7 @@ window.CAREER = {
         },
         {
           id: "phage-respiratory-virus",
-          product_name: "Phage",
+          cover_label: "Phage",
           title: "파지 기반 호흡기 바이러스 치료제 전임상",
           tagline: "국가 R&D · 파지 나노소재 활용 감염병 신속 대응 치료제 안전성 · 유효성",
           period: "2022.04 ~ 2022.12",
@@ -1174,6 +1403,7 @@ window.CAREER = {
     /* ───────────────────────────── Dong-Eui ───────────────────────────── */
     {
       id: "dong-eui-univ",
+      logo: "assets/img/orgs/deu.png",
       name: "동의대학교",
       name_en: "Dong-Eui University",
       short: "동의대학교",
@@ -1188,7 +1418,7 @@ window.CAREER = {
       projects: [
         {
           id: "bioplastic-capstone",
-          product_name: "Patent",
+          cover_label: "Patent",
           title: "생분해성 바이오 플라스틱 특허 출원",
           tagline: "천연추출물 및 효소를 이용한 생분해성 바이오 플라스틱 조성물 · 제조방법 (10-2023-0014442)",
           period: "2022.09 ~ 2023.02",
@@ -1197,8 +1427,8 @@ window.CAREER = {
           tags: ["Patent", "Capstone", "Experiment"],
           tech: ["Nile red staining", "Fluorescence microscopy", "Composting assay", "Esterase"],
           figures: [
-            ["assets/projects/bioplastic-patent-1.jpg", "시제품: 천연추출물 · 효소 조성 바이오 플라스틱"],
             ["assets/projects/bioplastic-patent-2.jpg", "Nile red 형광 염색: 대조군 vs 천연추출물 + 효소 처리군"],
+            ["assets/projects/bioplastic-patent-1.jpg", "시제품: 천연추출물 · 효소 조성 바이오 플라스틱"],
             ["assets/projects/bioplastic-patent-4.jpg", "퇴비화 환경 생분해 결과: 대조군 · 처리군 비교"],
             ["assets/projects/bioplastic-patent-3.jpg", "퇴비화 진행 샘플"],
             ["assets/projects/bioplastic-patent-5.jpg", "제조 공정: 혼합 → 가열 → 식힘 → 가공 → 건조"],
@@ -1230,7 +1460,7 @@ window.CAREER = {
         {
           id: "healthfood-matching-app",
           product_name: "인사이팅휴먼",
-          title: "인사이팅휴먼 맞춤형 건강기능식품 매칭",
+          title: "맞춤형 건강기능식품 매칭",
           tagline: "생활패턴 분석기기 기반 창업 프로젝트",
           period: "2020.08 ~ 2021.11",
           role: "창업팀 팀원",
@@ -1248,7 +1478,7 @@ window.CAREER = {
         },
         {
           id: "p53-natural-extract",
-          product_name: "p53",
+          cover_label: "p53",
           title: "천연추출물의 p53 발현 확인",
           tagline: "응용바이오학실험 · 생체조직핵심연구지원센터",
           period: "2022.09 ~ 2022.11",
