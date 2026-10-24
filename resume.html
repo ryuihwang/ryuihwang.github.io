@@ -140,7 +140,7 @@ a{color:inherit;text-decoration:none}
       "<b>PMS 급여 시스템 DX·AX 단독 개발</b> — 엑셀 69열 급여 로직을 FastAPI·PostgreSQL로 이관, <b>212명 1원 오차 없이 재현</b>",
       "LangGraph 8노드 AI 서포터 + pgvector·BM25 하이브리드 RAG, 2겹 검증으로 <b>회귀 43문항 전수 통과</b>",
       "<b>ESTory</b> 사내 sLLM 회의록 자동화 단독 개발 — 근거 유효율 <b>40%→100%</b>, STT CER <b>23.7%→9.4%</b>",
-      "<b>EST-flow</b> 근태·전자결재 SaaS를 <b>9일·97커밋</b>으로 MVP~운영 배포, 사내 챗봇(ESTi)·인사평가(ESTimate) 보조"]},
+      "<b>EST-flow</b> 근태·전자결재 시스템 MVP~운영 배포 단독 개발, 사내 규정 RAG 챗봇(소프트콘)·인사평가(ESTimate) 보조"]},
     {t:"[이스트캠프] 와썹 AI 모델 개발 13기", co:"이스트소프트 KDT · 728시간 수료", d:"2025.11 — 2026.04", b:[
       "정형·시계열·비정형 3개 팀 프로젝트 — <b>1차·2차 프로젝트 대상</b>, <b>이달의 러너</b> 선정",
       "Anomaly Transformer·IMDiffusion 기반 서버 시계열 이상탐지 대시보드, Emotion-LLaMA 독거노인 케어 Agent"]},
@@ -183,9 +183,9 @@ a{color:inherit;text-decoration:none}
   const main1 = `
     <div class="name">RYU I <span>HWANG</span></div>
     <div class="name-ko">황류이</div>
-    <div class="role">AI · AX Engineer</div>
+    <div class="role">AI Engineer</div>
     <div class="pill">${I.user} ABOUT ME</div>
-    <p class="about">바이오 실험실에서 출발해 <b>데이터 → AI 모델 → 실제 서비스</b>로 영역을 넓혀 온 AI 엔지니어입니다. 환자유래세포 약물 스크리닝과 임상·유전체 데이터 통합으로 데이터 엔지니어링을, 고려대 AI 연구실에서 멀티모달·생성 모델 연구를 경험했습니다. 현재 이스트소프트 EST-LAB에서 <b>급여·회의록·근태결재 시스템을 단독으로 설계·개발</b>하며, LLM·RAG·LangGraph로 사내 업무의 DX·AX 전환을 이끌고 있습니다. <b>“모델은 제안하고, 코드가 검증하고, 사람이 결정한다”</b>는 원칙으로 정확하고 안전한 AI를 만듭니다.</p>
+    <p class="about">데이터를 읽고, 모델을 만들고, <b>매일 쓰이는 서비스</b>까지 연결하는 AI 엔지니어입니다. 약물 스크리닝·임상·유전체 데이터 통합으로 데이터 엔지니어링을, 고려대 AI 연구실에서 멀티모달·생성 모델 연구를 경험했습니다. 현재 이스트소프트 EST-LAB에서 <b>급여·회의록·근태결재 시스템을 단독으로 설계·개발</b>하며, LLM·RAG·LangGraph로 사내 업무의 DX·AX 전환을 이끌고 있습니다. <b>“모델은 제안하고, 코드가 검증하고, 사람이 결정한다”</b>는 원칙으로 정확하고 안전한 AI를 만듭니다.</p>
     <div class="sec">${I.brief} JOB EXPERIENCE</div>
     <div class="tl">${JOBS.map(j => `<div class="job"><div class="job-h"><h4>${esc(j.t)}</h4><time>${esc(j.d)}</time></div><div class="co">${esc(j.co)}</div><ul>${j.b.map(x => `<li>${x}</li>`).join("")}</ul></div>`).join("")}</div>`;
 

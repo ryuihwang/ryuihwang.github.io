@@ -4,63 +4,60 @@
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const list = (a) => (Array.isArray(a) ? a : a ? [a] : []);
   const params = new URLSearchParams(location.search);
 
+  const svg = (d, w = 2) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
   const ICON = {
-    arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>',
-    ext: '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>',
-    cap: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>',
-    brief: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg>',
-    spark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg>',
-    trophy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>',
-    doc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>',
-    badge: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg>',
+    arrow: svg('<path d="M5 12h14M13 5l7 7-7 7"/>', 2.2),
+    ext: svg('<path d="M7 17 17 7M8 7h9v9"/>', 2.2),
+    down: svg('<path d="M12 4v12M6 11l6 6 6-6M5 20h14"/>', 2.2),
+    mail: svg('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>'),
+    gh: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c2-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>',
+    pen: svg('<path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5Z"/>'),
+    brief: svg('<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/>'),
+    cap: svg('<path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/>'),
+    trophy: svg('<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/>'),
+    doc: svg('<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>'),
+    badge: svg('<circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/>'),
+    link: svg('<path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/>'),
   };
 
   /* ---------- lookups ---------- */
   const ORGS = D.orgs;
   const orgById = Object.fromEntries(ORGS.map((o) => [o.id, o]));
   const PROJECTS = [];
-  ORGS.forEach((o) => o.projects.forEach((p, i) => PROJECTS.push(Object.assign(p, { _org: o, _idx: i }))));
+  ORGS.forEach((o) => o.projects.forEach((p) => PROJECTS.push(Object.assign(p, { _org: o }))));
   const projById = Object.fromEntries(PROJECTS.map((p) => [p.id, p]));
   const projUrl = (p) => `project.html?id=${encodeURIComponent(p.id)}`;
   const orgUrl = (o) => `org.html?id=${encodeURIComponent(o.id)}`;
-  const cls = (o) => `c${o.chapter || 3}`;
-  const yr = (s) => String(s || "").slice(0, 7);
-  const glyph = (p) => {
-    if (p.product_name) return p.product_name;
-    const m = (p.title || "").match(/^[A-Za-z][A-Za-z0-9-]*/) || list(p.tags).join(" ").match(/[A-Z][A-Za-z0-9-]+/);
-    return m ? m[0].slice(0, 6) : p._org.badge;
+  const ym = (s) => String(s || "").slice(0, 7);
+  const shortTitle = (p) => (p.title || "").split(/\s[—:-]\s/)[0];
+  const imagesOf = (p) => (list(p.images).length ? list(p.images).map((src) => [src, ""]) : list(p.figures));
+  const cover = (p) => `<div class="cover c${p._org.chapter || 4}"><b>${esc(p.product_name || shortTitle(p))}</b></div>`;
+  const media = (p) => {
+    const im = imagesOf(p)[0];
+    return im ? `<img src="${esc(im[0])}" alt="" loading="lazy">` : cover(p);
   };
-  const coverHTML = (p, rich = true) => {
-    const c = p.cover;
-    const inner = rich ? `<div class="cv-in"><span class="cv-name">${esc(p.product_name || glyph(p))}</span>${c ? `<span class="cv-metric">${esc(c.metric)}</span><span class="cv-label">${esc(c.label)}</span>` : `<span class="cv-label">${esc(list(p.tags).slice(0, 3).join(" · "))}</span>`}</div>` : "";
-    return `<div class="cover ${cls(p._org)}"><div class="dots"></div><div class="glyph">${esc(glyph(p))}</div>${inner}</div>`;
-  };
-  const thumbHTML = (p) => (p.images && p.images.length ? `<img src="${esc(p.images[0])}" alt="" loading="lazy">` : coverHTML(p));
-  // Wrap numbers in <b> so metrics pop.
-  const NUM_RE = /(\d[\d,.]*\s?(?:%p|%|명|건|개|배|초|분|줄|주|일|원|종|단계|문항|점)?(?:\s?→\s?\d[\d,.]*\s?(?:%p|%|명|건|개|배|초|분)?)?)/;
-  const numHL = (s) => String(s ?? "").split(NUM_RE).map((part, i) => (i % 2 ? `<b>${esc(part)}</b>` : esc(part))).join("");
-  const short = (p) => (p.title || "").split(/\s[—:-]\s/)[0];
-  const list = (a) => (Array.isArray(a) ? a : a ? [a] : []);
+  const awardTag = (p) => (p.award ? `<span class="award">🏆 ${esc(p.award)}</span>` : "");
 
   /* ---------- shared chrome ---------- */
-  function chrome(active) {
+  function chrome() {
     const nav = $("#nav");
     if (nav) {
-      const home = document.body.dataset.page === "home" ? "" : "index.html";
+      const h = document.body.dataset.page === "home" ? "" : "index.html";
       nav.innerHTML = `<div class="wrap">
-        <a class="brand" href="index.html"><span class="mark">RH</span>RYU I HWANG</a>
+        <a class="brand" href="index.html"><span class="logo">RH</span>RYU I HWANG</a>
         <button class="menu-btn" aria-label="메뉴 열기" aria-expanded="false"><span></span></button>
         <nav class="nav-links">
-          <a href="${home}#about">About</a><a href="${home}#journey">Journey</a><a href="${home}#career">Career</a>
-          <a href="${home}#projects">Projects</a><a href="${home}#honors">Honors</a><a href="${home}#contact">Contact</a>
-          <a class="btn btn-primary" href="resume.html">${ICON.doc.replace("<svg", '<svg width="16" height="16"')} 이력서</a>
+          <a href="${h}#about">About</a><a href="${h}#focus">What I do</a><a href="${h}#experience">Experience</a>
+          <a href="${h}#projects">Projects</a><a href="${h}#contact">Contact</a>
+          <a class="btn btn-dark" href="resume.html">Resume ${ICON.down}</a>
         </nav></div>`;
       const btn = $(".menu-btn", nav);
       btn.addEventListener("click", () => { const o = nav.classList.toggle("open"); btn.setAttribute("aria-expanded", o); });
       $$(".nav-links a", nav).forEach((a) => a.addEventListener("click", () => nav.classList.remove("open")));
-      const onScroll = () => nav.classList.toggle("solid", scrollY > 40);
+      const onScroll = () => nav.classList.toggle("solid", scrollY > 10);
       onScroll(); addEventListener("scroll", onScroll, { passive: true });
     }
     const f = $("#footer");
@@ -70,26 +67,26 @@
   function reveal() {
     const els = $$(".rv");
     if (!("IntersectionObserver" in window)) return els.forEach((e) => e.classList.add("in"));
-    const io = new IntersectionObserver((ents) => ents.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+    const io = new IntersectionObserver((ents) => ents.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -6% 0px" });
     els.forEach((e) => io.observe(e));
   }
 
-  function lightbox(imgs) {
+  function lightbox(items) {
     let lb = $(".lb");
     if (!lb) {
       lb = document.createElement("div");
       lb.className = "lb";
-      lb.innerHTML = '<button class="x" aria-label="닫기">×</button><button class="lbn prev" aria-label="이전">‹</button><img alt=""><button class="lbn nxt" aria-label="다음">›</button>';
+      lb.innerHTML = '<button class="x" aria-label="닫기">×</button><button class="prev" aria-label="이전">‹</button><img alt=""><div class="cap"></div><button class="nxt" aria-label="다음">›</button>';
       document.body.appendChild(lb);
     }
     let i = 0;
-    const show = (k) => { i = (k + imgs.length) % imgs.length; $("img", lb).src = imgs[i]; };
+    const show = (k) => { i = (k + items.length) % items.length; $("img", lb).src = items[i][0]; $(".cap", lb).textContent = items[i][1] || ""; };
     const close = () => lb.classList.remove("on");
     $(".x", lb).onclick = close;
     lb.onclick = (e) => { if (e.target === lb) close(); };
     $(".prev", lb).onclick = () => show(i - 1);
     $(".nxt", lb).onclick = () => show(i + 1);
-    $$(".prev,.nxt", lb).forEach((b) => (b.style.display = imgs.length > 1 ? "" : "none"));
+    $$(".prev,.nxt", lb).forEach((b) => (b.style.display = items.length > 1 ? "" : "none"));
     addEventListener("keydown", (e) => { if (!lb.classList.contains("on")) return; if (e.key === "Escape") close(); if (e.key === "ArrowLeft") show(i - 1); if (e.key === "ArrowRight") show(i + 1); });
     return (k) => { show(k); lb.classList.add("on"); };
   }
@@ -97,78 +94,70 @@
   /* ---------- HOME ---------- */
   function home() {
     const P = D.profile;
-    const awardsTop = D.awards.filter((a) => /대상|최우수/.test(a.title)).length;
-    const startYear = 2021;
+    const now = ORGS[0];
     $("#hero").innerHTML = `
-      <div class="grid-bg"></div><div class="hero-giant" aria-hidden="true">AX</div>
-      <div class="wrap">
-        <div class="hero-inner">
-          <div class="rv">
-            <span class="eyebrow"><span class="dot"></span>${esc(P.name)} · ${esc(P.name_en)} — 이스트소프트 EST-LAB 재직 중</span>
-            <h1>From <span class="hl">Bench</span><br>to <span class="hl">Bot.</span></h1>
-            <p class="hero-lede">바이오 실험실에서 출발해 <strong>데이터 → AI 모델 → 실제 서비스</strong>로 영역을 넓혀 온 <strong>AI · AX 엔지니어</strong>입니다. 지금은 사내 업무를 LLM·RAG·Agent로 다시 설계해, 정확하고 안전하게 운영되는 시스템을 만듭니다.</p>
-            <div class="hero-cta">
-              <a class="btn btn-primary" href="#projects">프로젝트 보기 ${ICON.arrow.replace("<svg", '<svg width="16" height="16"')}</a>
-              <a class="btn btn-ghost" href="resume.html">이력서 열기</a>
-            </div>
+      <div class="wrap hero-grid">
+        <div class="rv">
+          <p class="hello">Hello, I'm <b>${esc(P.name)}</b>.</p>
+          <h1>${esc(P.headline[0])}<br><span class="mark">${esc(P.headline[1])}</span></h1>
+          <p class="lede">${esc(P.lede)}</p>
+          <div class="hero-cta">
+            <a class="btn btn-dark" href="#projects">프로젝트 보기 ${ICON.arrow}</a>
+            <a class="btn btn-line" href="resume.html">이력서</a>
           </div>
-          <div class="hero-photo rv">
-            <div class="frame"><img src="${esc(P.photo.replace("assets/", "assets/img/"))}" alt="${esc(P.name)} 프로필 사진"></div>
-            <div class="quote-card"><b>“</b>모델은 제안하고, 코드가 검증하고, 사람이 결정한다.</div>
+          <div class="socials">
+            <a href="${esc(P.github)}" target="_blank" rel="noopener" aria-label="GitHub">${ICON.gh}</a>
+            <a href="${esc(P.velog)}" target="_blank" rel="noopener" aria-label="Velog">${ICON.pen}</a>
+            <a href="mailto:${esc(P.email)}" aria-label="Email">${ICON.mail}</a>
           </div>
         </div>
-        <div class="stats rv">
-          <div class="stat"><b>${new Date().getFullYear() - startYear}+ yrs</b><span>연구 · 개발 여정</span></div>
-          <div class="stat"><b>${ORGS.length}</b><span>소속 조직 · 연구실</span></div>
-          <div class="stat"><b>${PROJECTS.length}</b><span>수행 프로젝트</span></div>
-          <div class="stat"><b>${awardsTop}</b><span>대상 · 최우수상</span></div>
+        <div class="hero-photo rv">
+          <div class="frame"><img src="${esc(P.photo)}" alt="${esc(P.name)} 프로필 사진"></div>
+          <div class="quote">${esc(P.principle)}</div>
+          <a class="tag" href="${orgUrl(now)}"><small>Now</small>${esc(now.name_en)}</a>
         </div>
       </div>`;
-    const kw = ["LLM Agent", "RAG", "LangGraph", "sLLM", "DX · AX", "FastAPI", "React", "Multimodal AI", "Diffusion", "Time-series Anomaly", "Bioinformatics", "Drug Screening"];
+    const kw = [...P.keywords, "FastAPI", "PyTorch", "Data Science"];
     $("#marquee").innerHTML = `<div class="track">${[...kw, ...kw].map((k) => `<span>${esc(k)}</span>`).join("")}</div>`;
 
     // About
     const edu = D.education[0];
     $("#about-body").innerHTML = `
       <div class="about-text rv">
-        <p>${esc(P.summary_ko).replace(/(데이터, AI 모델, 그리고 실제 서비스)/, "<b>$1</b>").replace(/(1·2차 프로젝트 대상)/, "<b>$1</b>").replace(/(단독으로 설계·개발)/, "<b>$1</b>")}</p>
-        <div class="chips" style="margin-top:22px">${(P.keywords || []).map((k) => `<span class="chip v">${esc(k)}</span>`).join("")}</div>
-        <div class="motto">“${esc(P.motto)}”</div>
+        ${P.about.map((t) => `<p>${esc(t)}</p>`).join("")}
+        <div class="principle">“${esc(P.motto)}”</div>
       </div>
       <div class="facts rv">
-        <div class="fact"><span class="ico">${ICON.brief}</span><div><small>Now</small>이스트소프트 EST-LAB<span>AI-ML 개발자 · 사내 DX·AX 시스템 설계 및 개발</span></div></div>
-        <div class="fact"><span class="ico">${ICON.cap}</span><div><small>Education</small>${esc(edu.school)} ${esc(edu.degree)}<span>${esc(edu.major)} · ${esc(edu.minor)} · GPA ${esc(edu.gpa)}</span></div></div>
-        <div class="fact"><span class="ico">${ICON.trophy}</span><div><small>Highlights</small>이스트캠프 1·2차 프로젝트 대상 · 이달의 러너<span>AACR 2024 포스터 공동저자 · 특허 출원 1건</span></div></div>
-        <div class="fact"><span class="ico">${ICON.badge}</span><div><small>Certificates</small>${D.certificates.slice(0, 3).map((c) => esc(c.name.split(" (")[0])).join(" · ")}<span>${D.certificates.slice(3).map((c) => esc(c.name)).join(" · ")}</span></div></div>
+        <div class="fact"><span class="ico">${ICON.brief}</span><div><small>Now</small><b>${esc(now.name)}</b><span>${esc(now.role)}</span></div></div>
+        <div class="fact"><span class="ico">${ICON.cap}</span><div><small>Education</small><b>${esc(edu.school)} ${esc(edu.degree)}</b><span>${esc(edu.major.replace(" (주전공)", ""))} · 부전공 ${esc(edu.minor.replace(" (부전공)", ""))}</span></div></div>
+        <div class="fact"><span class="ico">${ICON.trophy}</span><div><small>Highlights</small><b>이스트캠프 1 · 2차 프로젝트 대상</b><span>AACR 2024 포스터 공동저자 · 특허 출원</span></div></div>
+        <div class="fact"><span class="ico">${ICON.badge}</span><div><small>Certificates</small><b>${D.certificates.slice(0, 2).map((c) => esc(c.name.split(" (")[0])).join(" · ")}</b><span>${esc(D.certificates[3].name)}</span></div></div>
       </div>`;
 
-    // Journey
-    $("#chapters").innerHTML = D.chapters.map((c) => `
-      <div class="chapter c${c.n} rv">
-        <div class="num">0${c.n}</div>
-        <div class="yr">${esc(c.years)}</div>
-        <h3>${esc(c.en)}</h3><div class="ko">${esc(c.ko)}</div>
-        <p>${esc(c.desc)}</p>
-        <div class="orgs">${c.orgs.map((id) => orgById[id]).filter(Boolean).map((o) => `<a href="${orgUrl(o)}">${esc(o.short)} <em>${o.projects.length} projects</em></a>`).join("")}</div>
+    // What I do
+    $("#focus-grid").innerHTML = D.focus.map((f, i) => `
+      <div class="fcard rv">
+        <span class="n">0${i + 1}</span>
+        <h3>${esc(f.t)}</h3>
+        <p>${esc(f.d)}</p>
+        <div class="chips">${f.k.map((k) => `<span class="chip">${esc(k)}</span>`).join("")}</div>
       </div>`).join("");
 
-    // Timeline
-    $("#timeline").innerHTML = ORGS.map((o) => {
+    // Experience
+    $("#exp-list").innerHTML = ORGS.map((o) => {
       const ch = D.chapters.find((c) => c.n === o.chapter);
-      return `<div class="tl-item ${cls(o)} rv">
-        <div class="tl-date">${esc(yr(o.period_start))}<span>— ${esc(o.period_end === "현재" ? "현재" : yr(o.period_end))}</span></div>
-        <a class="tl-card" href="${orgUrl(o)}">
-          <div class="tl-top">
-            <div class="tl-head"><span class="org-badge">${esc(o.badge)}</span><div><h3>${esc(o.name)}</h3><p>${esc(o.role)}</p></div></div>
-            ${ch ? `<span class="ch-tag">${esc(ch.ko)}</span>` : ""}
-          </div>
+      return `<a class="ecard rv" href="${orgUrl(o)}">
+        <span class="badge">${esc(o.badge)}</span>
+        <div>
+          <h3>${esc(o.name)}</h3>
+          <div class="role">${esc(o.role)}</div>
           <p class="one">${esc(o.one_liner)}</p>
-          <div class="proj-links">${o.projects.map((p) => `<span class="pl" data-href="${projUrl(p)}">${esc(short(p))}</span>`).join("")}</div>
-          <span class="tl-more">조직 상세 · 프로젝트 ${o.projects.length}개 ${ICON.arrow}</span>
-        </a></div>`;
+          <div class="plinks">${o.projects.map((p) => `<span data-href="${projUrl(p)}">${esc(shortTitle(p))}</span>`).join("")}</div>
+        </div>
+        <div class="date">${esc(ym(o.period_start))} — ${esc(o.period_end === "현재" ? "현재" : ym(o.period_end))}${ch ? `<span>${esc(ch.en)}</span>` : ""}</div>
+      </a>`;
     }).join("");
-    // Inner project chips act as links without nesting <a>.
-    $$("#timeline .pl").forEach((s) => {
+    $$("#exp-list .plinks span").forEach((s) => {
       s.setAttribute("role", "link"); s.tabIndex = 0;
       const go = (e) => { e.preventDefault(); e.stopPropagation(); location.href = s.dataset.href; };
       s.addEventListener("click", go);
@@ -176,29 +165,29 @@
     });
 
     // Featured
-    const feat = ["pms", "estory", "est-flow", "smd-anomaly-dashboard", "youth-2030-employment", "homi-ai", "mmgene", "ssl-rep-style-transfer"].map((id) => projById[id]).filter(Boolean);
-    $("#feat-grid").innerHTML = feat.map((p, i) => `
-      <a class="feat ${i < 2 ? "big" : ""} ${cls(p._org)} rv" href="${projUrl(p)}">
-        <div class="bg">${p.images && p.images.length ? `<img src="${esc(p.images[0])}" alt="" loading="lazy">` : coverHTML(p, false)}</div>
-        <div class="top"><span class="org">${esc(p._org.short)}</span>${p.award ? `<span class="award">🏆 ${esc(p.award.split(" (")[0])}</span>` : ""}</div>
-        <div>
+    const feat = PROJECTS.filter((p) => p.featured);
+    $("#feat-list").innerHTML = feat.map((p) => `
+      <a class="frow rv" href="${projUrl(p)}">
+        <div class="media">${media(p)}</div>
+        <div class="body">
+          <div class="kicker"><span>${esc(p._org.short)}</span><span>·</span><span>${esc(p.period)}</span>${awardTag(p)}</div>
           <h3>${esc(p.title)}</h3>
-          <p>${esc(p.summary)}</p>
-          <div class="chips">${list(p.tags).slice(0, 4).map((t) => `<span class="chip dark">${esc(t)}</span>`).join("")}</div>
+          <p>${esc(p.define)}</p>
+          <div class="chips">${list(p.tags).slice(0, 4).map((t) => `<span class="chip v">${esc(t)}</span>`).join("")}</div>
+          <span class="go">자세히 보기 ${ICON.arrow}</span>
         </div>
       </a>`).join("");
 
-    // All projects + filters
+    // Archive
     const groups = [{ id: "all", label: "전체", n: PROJECTS.length }, ...ORGS.map((o) => ({ id: o.id, label: o.short, n: o.projects.length }))];
     $("#filters").innerHTML = groups.map((g, i) => `<button class="${i ? "" : "on"}" data-f="${g.id}">${esc(g.label)}<span class="n">${g.n}</span></button>`).join("");
     $("#pgrid").innerHTML = PROJECTS.map((p) => `
-      <a class="pcard ${cls(p._org)}" data-org="${p._org.id}" href="${projUrl(p)}">
-        <div class="thumb">${thumbHTML(p)}${p.award ? `<span class="award">🏆 ${esc(p.award.split(" (")[0])}</span>` : ""}</div>
+      <a class="pcard" data-org="${p._org.id}" href="${projUrl(p)}">
+        <div class="thumb">${media(p)}${awardTag(p)}</div>
         <div class="body">
-          <div class="meta"><span>${esc(p._org.short)}</span><span>${esc((p.period || "").split(" (")[0])}</span></div>
-          <h3>${esc(p.title)}</h3>
-          <p>${esc(p.summary)}</p>
-          <div class="tags">${list(p.tags).slice(0, 4).map((t) => `<span>${esc(t)}</span>`).join("")}</div>
+          <div class="meta">${esc(p._org.short)} · ${esc(p.period)}</div>
+          <h4>${esc(p.title)}</h4>
+          <p>${esc(p.define)}</p>
         </div>
       </a>`).join("");
     $$("#filters button").forEach((b) => b.addEventListener("click", () => {
@@ -207,134 +196,153 @@
     }));
 
     // Skills
-    $("#skills").innerHTML = Object.entries(D.skills).map(([k, v]) => `
-      <div class="skill-box rv"><h4>${esc(k)}</h4><div class="chips">${v.map((s) => `<span class="chip">${esc(s)}</span>`).join("")}</div></div>`).join("");
+    $("#skill-grid").innerHTML = Object.entries(D.skills).map(([k, v]) => `
+      <div class="sbox rv"><h4>${esc(k)}</h4><div class="chips">${v.map((s) => `<span class="chip">${esc(s)}</span>`).join("")}</div></div>`).join("");
 
     // Honors
-    const pl = (id) => (projById[id] ? ` <a href="${projUrl(projById[id])}">프로젝트 →</a>` : "");
+    const pl = (id) => (projById[id] ? ` · <a href="${projUrl(projById[id])}">프로젝트 →</a>` : "");
     $("#honors-body").innerHTML = `
-      <div class="panel rv"><h3><span class="ico">${ICON.trophy}</span>Awards</h3><ul class="list">
-        ${D.awards.map((a) => `<li><time>${esc(a.date.slice(0, 7))}</time><div><b>${esc(a.title)}</b><small>${esc(a.issuer)}${pl(a.project_id)}</small></div></li>`).join("")}
+      <div class="panel rv"><h3><span class="ico">${ICON.trophy}</span>Awards</h3><ul class="hlist">
+        ${D.awards.map((a) => `<li><time>${esc(a.date.slice(0, 7))}</time><div><b>${esc(a.title.replace("[이스트캠프] 와썹 AI 모델 개발 13회차", "이스트캠프 13기"))}</b><small>${esc(a.issuer)}${pl(a.project_id)}</small></div></li>`).join("")}
       </ul></div>
-      <div style="display:grid;gap:24px;align-content:start">
-        <div class="panel rv"><h3><span class="ico">${ICON.doc}</span>Publications & Patent</h3><ul class="list">
-          ${D.publications_patents.map((x) => `<li><time>${esc(String(x.date).slice(0, 7))}</time><div><b>${esc(x.title)}</b><small>${esc(x.type)}${x.venue ? " · " + esc(x.venue) : ""}${x.number ? " · " + esc(x.number) : ""}${pl(x.project_id)}</small></div></li>`).join("")}
-        </ul></div>
-        <div class="panel rv"><h3><span class="ico">${ICON.badge}</span>Certificates</h3><ul class="list">
-          ${D.certificates.map((c) => `<li><time>${esc(c.date)}</time><div><b>${esc(c.name)}</b><small>${esc(c.issuer)}</small></div></li>`).join("")}
-        </ul></div>
-      </div>`;
+      <div class="panel rv"><h3><span class="ico">${ICON.doc}</span>Publications · Patent</h3><ul class="hlist">
+        ${D.publications_patents.map((x) => `<li><time>${esc(String(x.date).slice(0, 7))}</time><div><b>${esc(x.title)}</b><small>${esc(x.type)}${x.venue ? " · " + esc(x.venue) : ""}${x.number ? " · " + esc(x.number) : ""}${pl(x.project_id)}</small></div></li>`).join("")}
+      </ul></div>
+      <div class="panel rv"><h3><span class="ico">${ICON.badge}</span>Certificates · Education</h3><ul class="hlist">
+        ${D.certificates.map((c) => `<li><time>${esc(c.date)}</time><div><b>${esc(c.name)}</b><small>${esc(c.issuer)}</small></div></li>`).join("")}
+        ${D.education.slice(1).map((e) => `<li><time>${esc(ym(e.period_start))}</time><div><b>${esc(e.school)}</b><small>${esc(e.degree)}</small></div></li>`).join("")}
+      </ul></div>`;
 
     $("#contact-row").innerHTML = `
-      <a class="btn btn-light" href="mailto:${esc(P.email)}">${esc(P.email)}</a>
-      <a class="btn btn-ghost" href="${esc(P.github)}" target="_blank" rel="noopener">GitHub ${ICON.ext}</a>
-      <a class="btn btn-ghost" href="${esc(P.velog)}" target="_blank" rel="noopener">Velog ${ICON.ext}</a>
-      <a class="btn btn-primary" href="resume.html">이력서 보기</a>`;
+      <a class="btn btn-lime" href="mailto:${esc(P.email)}">${ICON.mail} ${esc(P.email)}</a>
+      <a class="btn btn-ghost-w" href="${esc(P.github)}" target="_blank" rel="noopener">GitHub ${ICON.ext}</a>
+      <a class="btn btn-ghost-w" href="${esc(P.velog)}" target="_blank" rel="noopener">Velog ${ICON.ext}</a>`;
   }
 
   /* ---------- ORG ---------- */
   function orgPage() {
     const o = orgById[params.get("id")] || ORGS[0];
     document.title = `${o.short} — 황류이 Portfolio`;
-    document.body.classList.add(cls(o));
     const ch = D.chapters.find((c) => c.n === o.chapter);
     $("#sub-hero").innerHTML = `
-      <div class="giant" aria-hidden="true">${esc(o.badge)}</div>
       <div class="wrap">
-        <div class="crumbs"><a href="index.html">Home</a><i>/</i><a href="index.html#career">Career</a><i>/</i><span>${esc(o.short)}</span></div>
-        ${ch ? `<span class="eyebrow" style="margin-bottom:20px"><span class="dot" style="background:var(--acc);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 25%,transparent)"></span>Chapter 0${ch.n} · ${esc(ch.en)}</span>` : ""}
+        <div class="crumbs"><a href="index.html">Home</a><i>/</i><a href="index.html#experience">Experience</a><i>/</i><span>${esc(o.short)}</span></div>
+        ${ch ? `<span class="eyebrow"><i></i>${esc(ch.en)} · ${esc(ch.ko)}</span>` : ""}
         <h1>${esc(o.name)}</h1>
-        ${o.name_en ? `<div class="en">${esc(o.name_en)}</div>` : ""}
-        <p class="lead">${esc(o.description || o.one_liner)}</p>
+        <p class="tagline">${esc(o.description || o.one_liner)}</p>
         <div class="meta-row">
           <div><small>Period</small>${esc(o.period_start)} — ${esc(o.period_end)}</div>
           <div><small>Role</small>${esc(o.role)}</div>
-          ${o.team ? `<div><small>Team</small>${esc(o.team)}</div>` : ""}
           ${o.location ? `<div><small>Location</small>${esc(o.location)}</div>` : ""}
-          <div><small>Projects</small>${o.projects.length}개</div>
         </div>
       </div>`;
-    $("#org-projects").innerHTML = o.projects.map((p, i) => `
-      <a class="op rv" href="${projUrl(p)}">
-        <div class="op-media">${thumbHTML(p)}<span class="idx">${String(i + 1).padStart(2, "0")}</span></div>
-        <div class="op-body">
-          <div class="meta">${esc(p.period || "")}${p.award ? ` · 🏆 ${esc(p.award.split(" (")[0])}` : ""}</div>
+    $("#org-projects").innerHTML = o.projects.map((p) => `
+      <a class="frow rv" href="${projUrl(p)}">
+        <div class="media">${media(p)}</div>
+        <div class="body">
+          <div class="kicker"><span>${esc(p.period)}</span><span>·</span><span>${esc(p.role.split(" · ")[0])}</span>${awardTag(p)}</div>
           <h3>${esc(p.title)}</h3>
-          ${p.subtitle ? `<div class="subt">${esc(p.subtitle)}</div>` : ""}
-          <p>${esc(p.summary)}</p>
-          <ul>${list(p.highlights && p.highlights.length ? p.highlights : p.results).slice(0, 3).map((r) => `<li>${numHL(r)}</li>`).join("")}</ul>
+          <p>${esc(p.define)}</p>
+          <div class="chips">${list(p.tags).slice(0, 4).map((t) => `<span class="chip v">${esc(t)}</span>`).join("")}</div>
           <span class="go">자세히 보기 ${ICON.arrow}</span>
         </div>
       </a>`).join("");
-    const extra = $("#org-extra");
-    if (o.other_repos && o.other_repos.length && extra) {
-      extra.innerHTML = `<div class="p-block rv" style="margin-top:56px"><h2>Team Context</h2><p>EST-LAB에서 함께 운영되는 사내 서비스들입니다. 직접 개발한 시스템은 이들과 Teams·SSO·알림 채널을 공유하도록 설계했습니다.</p>
-        <div class="features">${o.other_repos.map((r) => `<div class="feature"><b>${esc(r.repo)}</b><span>${esc(r.desc)}</span></div>`).join("")}</div></div>`;
-    }
     const k = ORGS.indexOf(o);
     const prev = ORGS[k + 1], next = ORGS[k - 1];
-    $("#org-nav").innerHTML = `${prev ? `<a href="${orgUrl(prev)}"><small>← 이전 커리어</small><b>${esc(prev.short)}</b></a>` : "<span></span>"}${next ? `<a class="next" href="${orgUrl(next)}"><small>다음 커리어 →</small><b>${esc(next.short)}</b></a>` : ""}`;
+    $("#org-nav").innerHTML = `${prev ? `<a href="${orgUrl(prev)}"><small>← 이전 경력</small><b>${esc(prev.short)}</b></a>` : "<span></span>"}${next ? `<a class="next" href="${orgUrl(next)}"><small>다음 경력 →</small><b>${esc(next.short)}</b></a>` : ""}`;
   }
 
-  /* ---------- PROJECT ---------- */
+  /* ---------- PROJECT (PMS 6-part layout) ---------- */
   function projectPage() {
     const p = projById[params.get("id")] || PROJECTS[0];
     const o = p._org;
-    document.title = `${short(p)} — 황류이 Portfolio`;
-    document.body.classList.add(cls(o));
+    document.title = `${shortTitle(p)} — 황류이 Portfolio`;
     $("#sub-hero").innerHTML = `
-      <div class="giant" aria-hidden="true">${esc(glyph(p))}</div>
       <div class="wrap">
-        <div class="crumbs"><a href="index.html">Home</a><i>/</i><a href="${orgUrl(o)}">${esc(o.short)}</a><i>/</i><span>${esc(short(p))}</span></div>
+        <div class="crumbs"><a href="index.html">Home</a><i>/</i><a href="${orgUrl(o)}">${esc(o.short)}</a><i>/</i><span>${esc(shortTitle(p))}</span></div>
+        <span class="eyebrow"><i></i>${esc(o.short)}${p.award ? ` · 🏆 ${esc(p.award)}` : ""}</span>
         <h1>${esc(p.title)}</h1>
-        ${p.subtitle ? `<div class="en" style="font-family:var(--sans)">${esc(p.subtitle)}</div>` : ""}
+        ${p.tagline ? `<p class="tagline">${esc(p.tagline)}</p>` : ""}
         <div class="meta-row">
-          <div><small>Organization</small>${esc(o.short)}</div>
-          <div><small>Period</small>${esc(p.period || "-")}</div>
-          <div><small>Role</small>${esc(p.role || o.role)}</div>
+          <div><small>Period</small>${esc(p.period)}</div>
+          <div><small>Role</small>${esc(p.role)}</div>
         </div>
+        <div class="chips">${list(p.tags).map((t) => `<span class="chip v">${esc(t)}</span>`).join("")}</div>
       </div>`;
 
-    const blocks = [];
-    const imgs = list(p.images);
-    if (imgs.length) blocks.push(`<div class="gallery rv">${imgs.map((s, i) => `<button data-i="${i}" aria-label="이미지 확대"><img src="${esc(s)}" alt="${esc(short(p))} 이미지 ${i + 1}" loading="lazy"></button>`).join("")}</div>`);
-    blocks.push(`<div class="p-block rv"><h2>Overview</h2><p class="big">${esc(p.summary)}</p></div>`);
-    if (p.highlights && p.highlights.length) blocks.push(`<div class="p-block rv"><h2>Highlights</h2><ul class="hl-list">${p.highlights.map((h) => `<li>${esc(h)}</li>`).join("")}</ul></div>`);
-    if (p.problem) blocks.push(`<div class="p-block rv"><h2>Problem</h2><p>${esc(p.problem)}</p></div>`);
-    if (list(p.approach).length) blocks.push(`<div class="p-block rv"><h2>Approach</h2><ol class="steps">${list(p.approach).map((a) => `<li>${esc(a)}</li>`).join("")}</ol></div>`);
-    if (p.architecture && list(p.architecture.layers).length) {
-      blocks.push(`<div class="p-block rv"><h2>Architecture</h2><div class="arch">${p.architecture.layers.map((l) => `<div class="layer"><h4>${esc(l.name)}</h4><ul>${list(l.items).map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}</div>
-        ${p.architecture.flow ? `<div class="flow"><b>Flow —</b> ${esc(p.architecture.flow)}</div>` : ""}</div>`);
-    }
-    const feat = (arr, title) => {
-      if (!list(arr).length) return;
-      blocks.push(`<div class="p-block rv"><h2>${title}</h2><div class="features">${list(arr).map((f) => typeof f === "string" ? `<div class="feature"><span style="color:#363c5c">${esc(f)}</span></div>` : `<div class="feature"><b>${esc(f.name)}</b><span>${esc(f.desc)}</span></div>`).join("")}</div></div>`);
-    };
-    feat(p.ax_features, "AX Features");
-    feat(p.features, "Features");
-    feat(p.security, "Security by Design");
-    if (list(p.results).length) blocks.push(`<div class="p-block rv"><h2>Results</h2><div class="results">${list(p.results).map((r) => `<div class="result">${numHL(r)}</div>`).join("")}</div></div>`);
+    const table = (head, rows, lastStrong) => `<div class="tbl-wrap"><table class="tbl"><thead><tr>${head.map((h) => `<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${rows.map((r) => `<tr>${r.map((c, i) => `<td${lastStrong && i === r.length - 1 ? ' class="to"' : ""}>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+    const bullets = (arr) => `<ul class="blist">${arr.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
+    const subT = (t) => `<h3 class="sub-t">${esc(t)}</h3>`;
 
+    const secs = [];
+    const add = (num, title, sub, body) => { if (body) secs.push({ num, title, sub, body }); };
+
+    // 01 핵심 요약
+    add("01", "핵심 요약", "한 줄 정의 · 핵심 가치",
+      (p.define ? `<div class="define">${esc(p.define)}</div>` : "") +
+      (list(p.values).length ? `<div class="values">${p.values.map(([t, d]) => `<div class="value"><b>${esc(t)}</b><span>${esc(d)}</span></div>`).join("")}</div>` : "") +
+      (p.support ? `<div class="support"><span class="ico">${ICON.link}</span><div><b>${esc(p.support.t)}</b><span>${esc(p.support.d)}</span></div></div>` : ""));
+
+    // 02 배경 및 문제 정의
+    add("02", "배경 및 문제 정의", "추진 배경 · Pain Points",
+      [list(p.bg).length ? subT("추진 배경") + bullets(p.bg) : "",
+       list(p.pains).length ? subT("Pain Points → Needs") + table(["Pain Point", "기존 (AS-IS)", "필요한 것 (Needs)"], p.pains, true) : ""].join(""));
+
+    // 03 문제 해결 방안
+    add("03", "문제 해결 방안", "해결 전략 · AS-IS → TO-BE",
+      [p.decision ? `<div class="decision"><small>핵심 결정</small><b>${esc(p.decision)}</b></div>` : "",
+       list(p.points).length ? `<ol class="steps">${p.points.map((x) => `<li>${esc(x)}</li>`).join("")}</ol>` : "",
+       list(p.asis).length ? subT("AS-IS → TO-BE") + table(["업무", "AS-IS", "TO-BE"], p.asis, true) : ""].join(""));
+
+    // 04 기술스택 및 아키텍처
+    add("04", "기술스택 및 아키텍처", "영역별 기술 · 아키텍처 · 파이프라인",
+      [list(p.stack).length ? subT("영역별 기술스택 · 선택 이유") + table(["영역", "기술", "선택 이유"], p.stack) : "",
+       list(p.arch).length ? subT("아키텍처") + `<div class="arch">${p.arch.map(([n, items]) => `<div class="layer"><h4>${esc(n)}</h4><ul>${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("")}</div>` + (p.flow ? `<div class="flowline"><small>Flow</small>${esc(p.flow)}</div>` : "") : "",
+       list(p.pipes).length ? subT("파이프라인") + p.pipes.map(([n, steps, note]) => `<div class="pipe"><h4>${esc(n)}</h4><ol>${steps.map((s) => `<li><span>${esc(s)}</span></li>`).join("")}</ol>${note ? `<p>${esc(note)}</p>` : ""}</div>`).join("") : "",
+       list(p.techniques).length ? subT("핵심 기법") + `<div class="tech-grid">${p.techniques.map(([n, d]) => `<div class="tech"><b>${esc(n)}</b><span>${esc(d)}</span></div>`).join("")}</div>` : "",
+       list(p.notes).length ? subT("설계 포인트") + bullets(p.notes) : "",
+       list(p.figures).length ? subT("실험 자료") + `<div class="figs">${p.figures.map(([src, cap], i) => `<figure><button data-fig="${i}" aria-label="이미지 확대"><img src="${esc(src)}" alt="${esc(cap)}" loading="lazy"></button><figcaption>${esc(cap)}</figcaption></figure>`).join("")}</div>` : ""].join(""));
+
+    // 05 성과 측정 — the only place for numbers
+    add("05", "성과 측정", "정량 지표",
+      list(p.kpis).length ? `<div class="kpis">${p.kpis.map(([v, l, s]) => `<div class="kpi"><span class="v">${esc(v)}</span><span class="l">${esc(l)}</span>${s ? `<span class="s">${esc(s)}</span>` : ""}</div>`).join("")}</div>${p.kpiNote ? `<p class="kpi-note">※ ${esc(p.kpiNote)}</p>` : ""}` : "");
+
+    // 06 기대 효과
+    add("06", "기대 효과", "효과 · 확장",
+      (list(p.impact).length ? bullets(p.impact) : "") + (p.quote ? `<div class="quote-box">${esc(p.quote)}</div>` : ""));
+
+    const gallery = list(p.images);
     const siblings = o.projects;
     const i = siblings.indexOf(p);
     const prev = siblings[i - 1], next = siblings[i + 1];
-    blocks.push(`<div class="pnav">${prev ? `<a href="${projUrl(prev)}"><small>← 이전 프로젝트</small><b>${esc(short(prev))}</b></a>` : `<a href="${orgUrl(o)}"><small>← 조직으로</small><b>${esc(o.short)}</b></a>`}${next ? `<a class="next" href="${projUrl(next)}"><small>다음 프로젝트 →</small><b>${esc(short(next))}</b></a>` : `<a class="next" href="index.html#projects"><small>전체 보기 →</small><b>All Projects</b></a>`}</div>`);
-    $("#p-main").innerHTML = blocks.join("");
+    $("#doc-main").innerHTML = `
+      ${gallery.length ? `<div class="gallery">${gallery.map((s, k) => `<button data-img="${k}" aria-label="이미지 확대"><img src="${esc(s)}" alt="${esc(shortTitle(p))} 이미지 ${k + 1}" loading="lazy"></button>`).join("")}</div>` : ""}
+      ${secs.map((s) => `<section class="dsec rv" id="s${s.num}"><div class="dhead"><span class="num">${s.num}</span><h2>${esc(s.title)}<small>${esc(s.sub)}</small></h2></div>${s.body}</section>`).join("")}
+      <div class="pnav">${prev ? `<a href="${projUrl(prev)}"><small>← 이전 프로젝트</small><b>${esc(shortTitle(prev))}</b></a>` : `<a href="${orgUrl(o)}"><small>← 소속으로</small><b>${esc(o.short)}</b></a>`}${next ? `<a class="next" href="${projUrl(next)}"><small>다음 프로젝트 →</small><b>${esc(shortTitle(next))}</b></a>` : `<a class="next" href="index.html#projects"><small>전체 보기 →</small><b>All Projects</b></a>`}</div>`;
 
-    const c = p.contribution;
     const links = p.links || {};
-    $("#aside").innerHTML = `
-      ${p.award ? `<div class="box award-box"><h5>Award</h5><b>🏆 ${esc(p.award)}</b></div>` : ""}
-      ${c && c.commits_total ? `<div class="box"><h5>Contribution</h5><dl><div><dt>커밋</dt><dd>${c.commits_mine} / ${c.commits_total} (${c.share_pct}%)</dd><div class="contrib"><i style="width:${Math.min(100, c.share_pct)}%"></i></div></div>
-        ${list(c.areas).length ? `<div><dt>담당 영역</dt><dd><div class="chips" style="margin-top:6px">${c.areas.slice(0, 6).map((a) => `<span class="chip" style="white-space:normal">${esc(a.split(/[:(（]/)[0].trim())}</span>`).join("")}</div></dd></div>` : ""}</dl></div>` : ""}
-      ${list(p.tech).length ? `<div class="box"><h5>Tech Stack</h5><div class="chips">${p.tech.map((t) => `<span class="chip">${esc(t)}</span>`).join("")}</div></div>` : ""}
-      ${p.stats && p.stats.loc ? `<div class="box"><h5>Codebase</h5><dl><div><dt>규모</dt><dd style="font-size:13px">${esc(p.stats.loc)}</dd></div>${p.stats.period ? `<div><dt>커밋 기간</dt><dd>${esc(p.stats.period)}</dd></div>` : ""}</dl></div>` : ""}
-      ${Object.keys(links).length ? `<div class="box links"><h5>Links</h5>${Object.entries(links).map(([k, v]) => `<a href="${esc(v)}" target="_blank" rel="noopener">${esc(k)} ${ICON.ext}</a>`).join("")}</div>` : ""}
-      ${list(p.tags).length ? `<div class="box"><h5>Tags</h5><div class="chips">${p.tags.map((t) => `<span class="chip v">${esc(t)}</span>`).join("")}</div></div>` : ""}`;
+    $("#toc").innerHTML = `
+      <h5>Contents</h5>
+      <nav>${secs.map((s) => `<a href="#s${s.num}"><b>${s.num}</b>${esc(s.title)}</a>`).join("")}</nav>
+      ${list(p.tech).length ? `<div class="side-box"><h5>Tech</h5><div class="chips">${p.tech.map((t) => `<span class="chip">${esc(t)}</span>`).join("")}</div></div>` : ""}
+      ${Object.keys(links).length ? `<div class="side-box links"><h5>Links</h5>${Object.entries(links).map(([k, v]) => `<a href="${esc(v)}" target="_blank" rel="noopener">${esc(k)} ↗</a>`).join("")}</div>` : ""}`;
 
-    if (imgs.length) {
-      const open = lightbox(imgs);
-      $$(".gallery button").forEach((b) => b.addEventListener("click", () => open(+b.dataset.i)));
+    if (gallery.length) {
+      const open = lightbox(gallery.map((s) => [s, ""]));
+      $$("[data-img]").forEach((b) => b.addEventListener("click", () => open(+b.dataset.img)));
+    }
+    if (list(p.figures).length) {
+      const open = lightbox(p.figures);
+      $$("[data-fig]").forEach((b) => b.addEventListener("click", () => open(+b.dataset.fig)));
+    }
+
+    // Highlight the current section in the TOC.
+    if ("IntersectionObserver" in window) {
+      const links = $$("#toc nav a");
+      const io = new IntersectionObserver((ents) => ents.forEach((e) => {
+        if (e.isIntersecting) links.forEach((a) => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id));
+      }), { rootMargin: "-30% 0px -60% 0px" });
+      $$(".dsec").forEach((s) => io.observe(s));
     }
   }
 
