@@ -152,20 +152,27 @@
     </div>`;
   }
 
-  // Awards / research / certificates as three stacked center-line timelines.
+  // Awards, research and certificates on one center line, alternating left and right.
   function honors() {
     const pl = (id) => (projById[id] ? `<a class="hl-link" href="${projUrl(projById[id])}">프로젝트 ${ICON.arrow}</a>` : "");
-    const tl = (title, icon, rows) => `
-      <section class="hblock rv">
-        <h3 class="hb-title"><span class="ico">${icon}</span>${esc(title)}</h3>
-        <ol class="vline">${rows.map(([date, name, tag, note, link]) => `
-          <li><time>${esc(date)}</time><div><b>${esc(name)}</b>${note ? `<p>${esc(note)}</p>` : ""}<div class="vtags"><span class="ltag">${esc(tag)}</span>${link || ""}</div></div></li>`).join("")}
-        </ol>
-      </section>`;
     const short = (s) => s.replace(" ([이스트캠프] 와썹 AI 모델 개발 13회차)", " (이스트캠프 13기)").replace("[이스트캠프] 와썹 AI 모델 개발 13회차", "이스트캠프 13기");
-    return tl("Awards", ICON.trophy, D.awards.map((a) => [a.date.slice(0, 7), short(a.title), a.issuer, a.note, pl(a.project_id)]))
-      + tl("Publications · Patent", ICON.doc, D.publications_patents.map((x) => [String(x.date).slice(0, 7), x.title, x.type, x.note, pl(x.project_id)]))
-      + tl("Certificates · Training", ICON.badge, [...D.certificates.map((c) => [c.date, c.name, c.issuer, c.note, ""]), ...D.education.slice(1).map((e) => [ym(e.period_start), e.school, e.degree, e.note, ""])].sort((x, y) => (x[0] < y[0] ? 1 : -1)));
+    const items = [
+      ...D.awards.map((a) => ({ d: a.date, k: "Award", ico: ICON.trophy, name: short(a.title), tag: a.issuer, note: a.note, link: pl(a.project_id) })),
+      ...D.publications_patents.map((x) => ({ d: String(x.date), k: "Research", ico: ICON.doc, name: x.title, tag: x.type, note: x.note, link: pl(x.project_id) })),
+      ...D.certificates.map((c) => ({ d: c.date, k: "Certificate", ico: ICON.badge, name: c.name, tag: c.issuer, note: c.note, link: "" })),
+      ...D.education.slice(1).map((e) => ({ d: ym(e.period_start), k: "Training", ico: ICON.badge, name: e.school, tag: e.degree, note: e.note, link: "" })),
+    ].sort((x, y) => (x.d < y.d ? 1 : -1));
+    const row = (it, i) => `
+      <li class="hz-row rv ${i % 2 ? "r" : "l"}" style="order:${i}">
+        <span class="hz-dot" aria-hidden="true"></span>
+        <time>${esc(it.d.slice(0, 7))}</time>
+        <span class="hz-kind"><i>${it.ico}</i>${it.k}</span>
+        <b>${esc(it.name)}</b>
+        ${it.note ? `<p>${esc(it.note)}</p>` : ""}
+        <div class="vtags"><span class="ltag">${esc(it.tag)}</span>${it.link}</div>
+      </li>`;
+    // Two interlocking columns on desktop; on mobile the columns dissolve and `order` keeps the dates in sequence.
+    return `<div class="hz">${[0, 1].map((s) => `<ol class="hz-col ${s ? "r" : "l"}">${items.map((it, i) => (i % 2 === s ? row(it, i) : "")).join("")}</ol>`).join("")}</div>`;
   }
 
   const SMILE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c.9 1.3 2.1 2 3.5 2s2.6-.7 3.5-2M9 9.5h.01M15 9.5h.01"/></svg>';
@@ -209,8 +216,9 @@
     heroVisual();
     coreTiles($("#core-grid"));
 
+    // Desktop gets the wide pipeline so it fits one view; mobile keeps the tall one.
     $("#about-body").innerHTML = `
-      <div class="about-fig pop"><img src="assets/img/hero.svg" alt="데이터, 모델, 서비스로 이어지는 AI 파이프라인 인포그래픽"></div>
+      <div class="about-fig pop"><picture><source media="(min-width: 861px)" srcset="assets/img/hero-wide.svg"><img src="assets/img/hero.svg" alt="데이터, 모델, 서비스로 이어지는 AI 파이프라인 인포그래픽"></picture></div>
       ${facts(false)}`;
 
     $("#focus-grid").innerHTML = D.focus.map((f, i) => `
@@ -230,22 +238,78 @@
           <h3>${esc(o.role.split(" · ")[0])}</h3>
           <p>${esc(o.name)}</p>
           ${o.location ? `<span class="ltag">${esc(o.location)}</span>` : ""}
-          ${i === 0 ? `<p class="tl-what">${esc(o.one_liner.split(":")[0])}</p>` : ""}
         </div>
       </a>`).join("");
+
+    // Desktop only: the same timeline folded into a ㄹ-shaped snake, three stops per row.
+    const PER = 3, rows = [];
+    for (let k = 0; k < ORGS.length; k += PER) rows.push(ORGS.slice(k, k + PER));
+    $("#exp-list").insertAdjacentHTML("afterend", `<div class="snake">${rows.map((row, r) => {
+      const rev = r % 2 === 1, n = row.length, first = rev ? PER - n + 1 : 1;
+      const turn = r < rows.length - 1 ? (rev ? " tl" : " tr") : "";
+      const cells = row.map((o, j) => {
+        const i = r * PER + j, col = rev ? PER - j : j + 1;
+        return `<a class="sn-cell rv${i === 0 ? " now" : ""}" style="grid-column:${col}" href="${orgUrl(o)}">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-card">
+            <div class="tl-year">${esc(span(o))}</div>
+            <h3>${esc(o.role.split(" · ")[0])}</h3>
+            <p>${esc(o.name)}</p>
+            ${o.location ? `<span class="ltag">${esc(o.location)}</span>` : ""}
+            </div>
+        </a>`;
+      }).join("");
+      return `<div class="sn-row${turn}" style="--a:${first};--n:${n}">${cells}</div>`;
+    }).join("")}</div>`);
 
     // Project wall: mosaic of cover images; hovering one grows it and reveals its info.
     $("#feat-list").outerHTML = `<div class="wall" id="wall"></div>`;
     const wallItems = [...PROJECTS.filter((p) => p.featured), ...PROJECTS.filter((p) => !p.featured && imagesOf(p).length)];
-    // [row, col, height, width] per tile; two 4x4 blocks tile the grid with no holes.
-    const SPOTS = [[1,1,2,2],[1,3,2,1],[1,4,2,1],[3,1,1,2],[3,3,1,1],[3,4,1,1],[4,1,1,1],[4,2,1,1],[4,3,1,2],
-                   [5,1,1,1],[5,2,1,1],[5,3,2,2],[6,1,2,1],[6,2,2,1],[7,3,1,1],[7,4,1,1],[8,1,1,2],[8,3,1,2]];
+    // [row, col, height, width] per tile on a 6-column grid; the three bands tile with no holes.
+    const SPOTS = [[1,1,2,2],[1,3,1,1],[1,4,1,2],[1,6,2,1],[2,3,1,1],[2,4,1,1],[2,5,1,1],
+                   [3,1,1,1],[3,2,2,1],[3,3,1,2],[3,5,2,2],[4,1,1,1],[4,3,1,1],[4,4,1,1],
+                   [5,1,1,2],[5,3,1,2],[5,5,1,2]];
     $("#wall").innerHTML = wallItems.slice(0, SPOTS.length).map((p, n) => `
       <a class="wtile" style="grid-area:${SPOTS[n][0]} / ${SPOTS[n][1]} / span ${SPOTS[n][2]} / span ${SPOTS[n][3]}" href="${projUrl(p)}">
         ${media(p)}
         <div class="winfo"><span class="wo">${esc(p._org.short)}</span><b>${esc(p.product_name ? p.product_name + " · " : "")}${esc(p.title)}</b>${p.award ? awardTag(p) : ""}</div>
       </a>`).join("");
+    wallPeek($("#wall"), wallItems);
 
+  }
+
+  // Desktop hover: tiles crop their image, so show the whole image and the full title in a larger card.
+  function wallPeek(wall, items) {
+    const can = matchMedia("(hover: hover) and (min-width: 861px)");
+    const peek = document.createElement("a");
+    peek.className = "wpeek";
+    wall.appendChild(peek);
+    let timer = 0;
+    const hide = () => { timer = setTimeout(() => peek.classList.remove("on"), 90); };
+    const place = (tile) => {
+      const w = wall.getBoundingClientRect(), r = tile.getBoundingClientRect();
+      const pw = peek.offsetWidth, ph = peek.offsetHeight;
+      const x = Math.min(Math.max(r.left - w.left + r.width / 2 - pw / 2, 0), w.width - pw);
+      const y = Math.min(Math.max(r.top - w.top + r.height / 2 - ph / 2, 0), Math.max(w.height - ph, 0));
+      peek.style.transform = `translate(${x}px, ${y}px)`;
+    };
+    $$(".wtile", wall).forEach((tile, n) => {
+      tile.addEventListener("mouseenter", () => {
+        if (!can.matches) return;
+        clearTimeout(timer);
+        const p = items[n];
+        peek.href = tile.getAttribute("href");
+        peek.innerHTML = `<div class="wp-media">${media(p)}</div>
+          <div class="wp-info"><span class="wo">${esc(p._org.short)}</span><b>${esc(p.product_name ? p.product_name + " · " : "")}${esc(p.title)}</b>${p.tagline ? `<p>${esc(p.tagline)}</p>` : ""}${p.award ? awardTag(p) : ""}</div>`;
+        const img = $("img", peek);
+        if (img) { img.loading = "eager"; img.addEventListener("load", () => place(tile)); }
+        peek.classList.add("on");
+        place(tile);
+      });
+      tile.addEventListener("mouseleave", hide);
+    });
+    peek.addEventListener("mouseenter", () => clearTimeout(timer));
+    peek.addEventListener("mouseleave", hide);
   }
 
   function contactRow() {

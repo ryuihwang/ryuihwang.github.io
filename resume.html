@@ -74,12 +74,22 @@ ul{list-style:none}
   .skills div{grid-template-columns:1fr;gap:0}
   .row-h{flex-direction:column;gap:2px}
 }
-@page{size:A4;margin:0}
+@page{size:A4;margin:13mm 0 12mm}
 @media print{
   body{background:#fff}
   .toolbar{display:none}
-  .sheet{margin:0;box-shadow:none;min-height:auto}
-  .sec{break-inside:avoid}
+  .sheet{margin:0;box-shadow:none;min-height:auto;padding:0 16mm;font-size:8.8pt;line-height:1.48}
+  .photo{width:23mm;height:28mm}
+  .head{padding-bottom:4.5mm}
+  .summary{margin-top:4mm}
+  .head,.summary{break-inside:avoid}
+  .sec>h2{break-after:avoid}
+  .exp>div,.items>div,.skills>div{break-inside:avoid}
+  .sec{margin-top:4mm;padding-top:3.6mm}
+  .exp>div{padding:3.2mm 0}
+  .items{gap:3mm}
+  .list2{gap:2.2mm 8mm}
+  .sec:last-child{break-inside:avoid}
 }
 </style>
 </head>
