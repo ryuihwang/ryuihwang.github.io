@@ -32,7 +32,7 @@
   const projUrl = (p) => `project.html?id=${encodeURIComponent(p.id)}`;
   const orgUrl = (o) => `org.html?id=${encodeURIComponent(o.id)}`;
   const ym = (s) => String(s || "").slice(0, 7);
-  const shortTitle = (p) => (p.title || "").split(/\s[—:-]\s/)[0];
+  const shortTitle = (p) => (p.product_name && (p.title || "").startsWith(p.product_name) ? p.product_name : p.title || "");
   const imagesOf = (p) => (list(p.images).length ? list(p.images).map((src) => [src, ""]) : list(p.figures));
   const cover = (p) => `<div class="cover c${p._org.chapter || 4}"><b>${esc(p.product_name || shortTitle(p))}</b></div>`;
   const media = (p) => {
@@ -98,8 +98,8 @@
     $("#hero").innerHTML = `
       <div class="wrap hero-grid">
         <div class="rv">
-          <p class="hello">Hello, I'm <b>${esc(P.name)}</b>.</p>
-          <h1>${esc(P.headline[0])}<br><span class="mark">${esc(P.headline[1])}</span></h1>
+          <p class="hello"><b>${esc(P.name)}</b> · ${esc(P.eyebrow)}</p>
+          <h1>${esc(P.headline[0])}<br><span class="mark">${esc(P.headline[1])}</span>${esc(P.headline[2])}</h1>
           <p class="lede">${esc(P.lede)}</p>
           <div class="hero-cta">
             <a class="btn btn-dark" href="#projects">프로젝트 보기 ${ICON.arrow}</a>
@@ -112,8 +112,7 @@
           </div>
         </div>
         <div class="hero-photo rv">
-          <div class="frame"><img src="${esc(P.photo)}" alt="${esc(P.name)} 프로필 사진"></div>
-          <a class="tag" href="${orgUrl(now)}"><small>Now</small>${esc(now.name_en)}</a>
+          <img src="assets/img/hero.svg" alt="데이터, 모델, 서비스로 이어지는 AI 파이프라인 인포그래픽">
         </div>
       </div>`;
     const kw = [...P.keywords, "FastAPI", "PyTorch", "Data Science"];
@@ -124,7 +123,6 @@
     $("#about-body").innerHTML = `
       <div class="about-text rv">
         ${P.about.map((t) => `<p>${esc(t)}</p>`).join("")}
-        <div class="principle">${esc(P.principle)}</div>
       </div>
       <div class="facts rv">
         <div class="fact"><span class="ico">${ICON.brief}</span><div><small>Now</small><b>${esc(now.name)}</b><span>${esc(now.role)}</span></div></div>
@@ -153,7 +151,7 @@
           <p class="one">${esc(o.one_liner)}</p>
           <div class="plinks">${o.projects.map((p) => `<span data-href="${projUrl(p)}">${esc(shortTitle(p))}</span>`).join("")}</div>
         </div>
-        <div class="date">${esc(ym(o.period_start))} — ${esc(o.period_end === "현재" ? "현재" : ym(o.period_end))}${ch ? `<span>${esc(ch.en)}</span>` : ""}</div>
+        <div class="date">${esc(ym(o.period_start))} ~ ${esc(o.period_end === "현재" ? "현재" : ym(o.period_end))}${ch ? `<span>${esc(ch.en)}</span>` : ""}</div>
       </a>`;
     }).join("");
     $$("#exp-list .plinks span").forEach((s) => {
@@ -219,7 +217,7 @@
   /* ---------- ORG ---------- */
   function orgPage() {
     const o = orgById[params.get("id")] || ORGS[0];
-    document.title = `${o.short} — 황류이 Portfolio`;
+    document.title = `${o.short} | 황류이 Portfolio`;
     const ch = D.chapters.find((c) => c.n === o.chapter);
     $("#sub-hero").innerHTML = `
       <div class="wrap">
@@ -228,7 +226,7 @@
         <h1>${esc(o.name)}</h1>
         <p class="tagline">${esc(o.description || o.one_liner)}</p>
         <div class="meta-row">
-          <div><small>Period</small>${esc(o.period_start)} — ${esc(o.period_end)}</div>
+          <div><small>Period</small>${esc(o.period_start)} ~ ${esc(o.period_end)}</div>
           <div><small>Role</small>${esc(o.role)}</div>
           ${o.location ? `<div><small>Location</small>${esc(o.location)}</div>` : ""}
         </div>
@@ -253,7 +251,7 @@
   function projectPage() {
     const p = projById[params.get("id")] || PROJECTS[0];
     const o = p._org;
-    document.title = `${shortTitle(p)} — 황류이 Portfolio`;
+    document.title = `${shortTitle(p)} | 황류이 Portfolio`;
     $("#sub-hero").innerHTML = `
       <div class="wrap">
         <div class="crumbs"><a href="index.html">Home</a><i>/</i><a href="${orgUrl(o)}">${esc(o.short)}</a><i>/</i><span>${esc(shortTitle(p))}</span></div>
@@ -300,13 +298,13 @@
        list(p.notes).length ? subT("설계 포인트") + bullets(p.notes) : "",
        list(p.figures).length ? subT("실험 자료") + `<div class="figs">${p.figures.map(([src, cap], i) => `<figure><button data-fig="${i}" aria-label="이미지 확대"><img src="${esc(src)}" alt="${esc(cap)}" loading="lazy"></button><figcaption>${esc(cap)}</figcaption></figure>`).join("")}</div>` : ""].join(""));
 
-    // 05 성과 측정 — the only place for numbers
+    // 05 성과 측정: the only place for numbers
     add("05", "성과 측정", "정량 지표",
       list(p.kpis).length ? `<div class="kpis">${p.kpis.map(([v, l, s]) => `<div class="kpi"><span class="v">${esc(v)}</span><span class="l">${esc(l)}</span>${s ? `<span class="s">${esc(s)}</span>` : ""}</div>`).join("")}</div>${p.kpiNote ? `<p class="kpi-note">※ ${esc(p.kpiNote)}</p>` : ""}` : "");
 
     // 06 기대 효과
     add("06", "기대 효과", "효과 · 확장",
-      (list(p.impact).length ? bullets(p.impact) : "") + (p.quote ? `<div class="quote-box">${esc(p.quote)}</div>` : ""));
+      (list(p.impact).length ? bullets(p.impact) : ""));
 
     const gallery = list(p.images);
     const siblings = o.projects;
